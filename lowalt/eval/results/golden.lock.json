@@ -1,0 +1,235 @@
+{
+  "A01": {
+    "value": 233.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      0,
+      720
+    ],
+    "category": "aggregation",
+    "question": "全部 5 天 07:00—19:00 的配送订单总量是多少？"
+  },
+  "A02": {
+    "value": 21.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      420,
+      540
+    ],
+    "category": "aggregation",
+    "question": "全部 5 天 14:00—16:00 的配送订单总量是多少？"
+  },
+  "A03": {
+    "value": 9.0,
+    "sql": "SELECT MAX(n) FROM (SELECT o.hour_bucket AS hb, v.node_id AS nd, COUNT(*) AS n\n      FROM orders o\n      JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n            FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n        ON o.order_id = v.order_id\n      WHERE o.release_min >= ? AND o.release_min < ?\n      GROUP BY 1, 2)",
+    "params": [
+      420,
+      540
+    ],
+    "category": "aggregation",
+    "question": "14:00—16:00 的配送需求峰值出现在哪个起降节点，峰值是多少单？"
+  },
+  "A04": {
+    "value": 31.0,
+    "sql": "SELECT MAX(n) FROM (SELECT o.hour_bucket AS hb, v.node_id AS nd, COUNT(*) AS n\n      FROM orders o\n      JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n            FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n        ON o.order_id = v.order_id\n      WHERE o.release_min >= ? AND o.release_min < ?\n      GROUP BY 1, 2)",
+    "params": [
+      600,
+      720
+    ],
+    "category": "aggregation",
+    "question": "17:00—19:00 晚高峰的配送需求峰值是多少单？"
+  },
+  "A05": {
+    "value": 16.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      480,
+      540
+    ],
+    "category": "aggregation",
+    "question": "14:00—16:00 按小时分解，15:00—16:00 这一小时的配送量是多少？"
+  },
+  "A06": {
+    "value": 11.0,
+    "sql": "SELECT COUNT(*) FROM orders o\n           JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n                 FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n             ON o.order_id = v.order_id\n           WHERE o.release_min >= ? AND o.release_min < ? AND v.node_id = ?",
+    "params": [
+      420,
+      540,
+      1
+    ],
+    "category": "aggregation",
+    "question": "14:00—16:00 从起降节点 1 起飞的配送订单有多少？"
+  },
+  "A07": {
+    "value": 4.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ? AND day = ?",
+    "params": [
+      420,
+      540,
+      0
+    ],
+    "category": "aggregation",
+    "question": "第 0 天 14:00—16:00 的配送订单总量是多少？"
+  },
+  "A08": {
+    "value": 50.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      30,
+      150
+    ],
+    "category": "aggregation",
+    "question": "早高峰 07:30—09:30 的配送订单总量是多少？"
+  },
+  "S01": {
+    "value": 0.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points t\n           JOIN (SELECT zone_id, MIN(lat) lo1, MAX(lat) hi1,\n                        MIN(lon) lo2, MAX(lon) hi2,\n                        MIN(active_from_min) t0, MAX(active_to_min) t1\n                 FROM no_fly_zones GROUP BY zone_id) z\n             ON t.lat BETWEEN z.lo1 AND z.hi1\n            AND t.lon BETWEEN z.lo2 AND z.hi2\n            AND t.t_min >= z.t0 AND t.t_min < z.t1",
+    "params": [],
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区的冲突次数是多少？"
+  },
+  "S02": {
+    "value": 0.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points t\n           JOIN (SELECT zone_id, MIN(lat) lo1, MAX(lat) hi1,\n                        MIN(lon) lo2, MAX(lon) hi2,\n                        MIN(active_from_min) t0, MAX(active_to_min) t1\n                 FROM no_fly_zones GROUP BY zone_id) z\n             ON t.lat BETWEEN z.lo1 AND z.hi1\n            AND t.lon BETWEEN z.lo2 AND z.hi2\n            AND t.t_min >= z.t0 AND t.t_min < z.t1",
+    "params": [],
+    "category": "spatial",
+    "question": "全部轨迹落入禁飞区的命中点有多少个？"
+  },
+  "S03": {
+    "value": 0.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points t\n           JOIN (SELECT zone_id, MIN(lat) lo1, MAX(lat) hi1,\n                        MIN(lon) lo2, MAX(lon) hi2,\n                        MIN(active_from_min) t0, MAX(active_to_min) t1\n                 FROM no_fly_zones GROUP BY zone_id) z\n             ON t.lat BETWEEN z.lo1 AND z.hi1\n            AND t.lon BETWEEN z.lo2 AND z.hi2\n            AND t.t_min >= z.t0 AND t.t_min < z.t1",
+    "params": [],
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区冲突的累计时长是多少分钟？"
+  },
+  "S04": {
+    "value": 821.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= ? AND t_min < ?",
+    "params": [
+      480,
+      660
+    ],
+    "category": "spatial",
+    "question": "机场禁飞区激活时段 15:00—18:00 内共有多少个轨迹点？"
+  },
+  "S05": {
+    "value": 920.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= ? AND t_min < ?",
+    "params": [
+      600,
+      720
+    ],
+    "category": "spatial",
+    "question": "宝安体育馆临时禁飞区激活时段 17:00—19:00 内共有多少个轨迹点？"
+  },
+  "S06": {
+    "value": 38.46153846153846,
+    "sql": "SELECT MAX(n) * 100.0 / SUM(n) FROM (\n             SELECT altitude_layer, COUNT(*) n FROM trajectory_points\n             WHERE phase = 'cruise' AND day = ? GROUP BY 1)",
+    "params": [
+      0
+    ],
+    "category": "spatial",
+    "question": "第 0 天巡航高度层中主导层的占比是多少？"
+  },
+  "S07": {
+    "value": 260.0,
+    "sql": "SELECT COUNT(*) FROM trajectory_points WHERE phase = 'cruise' AND day = ?",
+    "params": [
+      0
+    ],
+    "category": "spatial",
+    "question": "第 0 天共有多少个巡航阶段轨迹点？"
+  },
+  "S08": {
+    "value": 100.0,
+    "sql": "SELECT MAX(n) FROM (\n             SELECT altitude_layer, COUNT(*) n FROM trajectory_points\n             WHERE phase = 'cruise' AND day = ? GROUP BY 1)",
+    "params": [
+      0
+    ],
+    "category": "spatial",
+    "question": "第 0 天主导高度层包含多少个巡航点？"
+  },
+  "C01": {
+    "value": 1.0,
+    "sql": "WITH g AS (SELECT o.hour_bucket AS hb, v.node_id AS nd, COUNT(*) AS n\n      FROM orders o\n      JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n            FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n        ON o.order_id = v.order_id\n      WHERE o.release_min >= ? AND o.release_min < ?\n      GROUP BY 1, 2)\n      SELECT CASE\n        WHEN (CAST(SUBSTR(hb, 1, 2) AS INTEGER) - 7) * 60 < ?\n         AND (CAST(SUBSTR(hb, 1, 2) AS INTEGER) - 7) * 60 + 60 > ?\n        THEN 1 ELSE 0 END\n      FROM g ORDER BY n DESC, hb, nd LIMIT 1",
+    "params": [
+      420,
+      540,
+      660,
+      480
+    ],
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值所在时段，是否与机场禁飞区激活时段 15:00—18:00 重叠？"
+  },
+  "C02": {
+    "value": 42.918454935622314,
+    "sql": "SELECT COUNT(*) * 100.0 / (SELECT COUNT(*) FROM orders)\n           FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      600,
+      720
+    ],
+    "category": "composite",
+    "question": "17:00—19:00 晚高峰订单量占全天的百分比是多少？"
+  },
+  "C03": {
+    "value": 95.0,
+    "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      480,
+      660
+    ],
+    "category": "composite",
+    "question": "禁飞区活跃的 15:00—18:00 窗口内共有多少配送订单？"
+  },
+  "C04": {
+    "value": 40.772532188841204,
+    "sql": "SELECT COUNT(*) * 100.0 / (SELECT COUNT(*) FROM orders)\n           FROM orders WHERE release_min >= ? AND release_min < ?",
+    "params": [
+      480,
+      660
+    ],
+    "category": "composite",
+    "question": "15:00—18:00 窗口内的订单量占全天的百分比是多少？"
+  },
+  "C05": {
+    "value": 42.857142857142854,
+    "sql": "SELECT MAX(n) * 100.0 / SUM(n) FROM (SELECT o.hour_bucket AS hb, v.node_id AS nd, COUNT(*) AS n\n      FROM orders o\n      JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n            FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n        ON o.order_id = v.order_id\n      WHERE o.release_min >= ? AND o.release_min < ?\n      GROUP BY 1, 2)",
+    "params": [
+      420,
+      540
+    ],
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值分组占该窗口订单总量的百分比是多少？"
+  },
+  "C06": {
+    "value": 50.0,
+    "sql": "SELECT MAX(n) * 100.0 / SUM(n) FROM (SELECT o.hour_bucket AS hb, v.node_id AS nd, COUNT(*) AS n\n      FROM orders o\n      JOIN (SELECT order_id, MIN(origin_node_id) AS node_id\n            FROM trajectory_points WHERE seq = 0 GROUP BY order_id) v\n        ON o.order_id = v.order_id\n      WHERE o.release_min >= ? AND o.release_min < ? AND o.day = ?\n      GROUP BY 1, 2)",
+    "params": [
+      420,
+      540,
+      0
+    ],
+    "category": "composite",
+    "question": "第 0 天 14:00—16:00 峰值分组占该日该窗口订单总量的百分比是多少？"
+  },
+  "C07": {
+    "value": 55.55555555555556,
+    "sql": "SELECT SUM(CASE WHEN phase = 'cruise' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)\n           FROM trajectory_points WHERE day = ?",
+    "params": [
+      0
+    ],
+    "category": "composite",
+    "question": "第 0 天巡航阶段轨迹点占全部轨迹点的百分比是多少？"
+  },
+  "C08": {
+    "value": 54.166666666666664,
+    "sql": "SELECT MAX(n) * 100.0 / SUM(n) FROM (\n             SELECT altitude_layer, COUNT(*) n FROM trajectory_points\n             WHERE phase = 'cruise' AND day = ? AND t_min >= ? AND t_min < ?\n             GROUP BY 1)",
+    "params": [
+      0,
+      600,
+      720
+    ],
+    "category": "composite",
+    "question": "第 0 天 17:00—19:00 窗口内主导巡航高度层的占比是多少？"
+  }
+}

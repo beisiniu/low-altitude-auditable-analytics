@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# DuckDB 临时工作区
+*.duckdb
+*.duckdb.wal
+
+# 编辑器 / 系统
+.DS_Store
+*.swp
+*.swo
+*~
+*.log
+
+# 大模型权重与推理引擎：体积过大，不入库（下载方式见 models/README.md）
+*.gguf
+models/bin/
+
+# 说明：lowalt/data/out/ 下的 CSV 与 manifest.json 是确定性生成物，
+# 随仓库提供以便一键复现，故刻意不忽略。
+# lowalt/eval/results/ 下所有结果 JSON 同样随仓库提供，作为文档数字的唯一真相。

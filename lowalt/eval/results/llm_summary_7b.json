@@ -1,0 +1,180 @@
+{
+  "llm_sql": {
+    "n": 24,
+    "parsed": 11,
+    "numeric_correct": 5,
+    "numeric_accuracy": 0.2083,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 24489.7
+  },
+  "llm_sql_focused": {
+    "n": 24,
+    "parsed": 15,
+    "numeric_correct": 4,
+    "numeric_accuracy": 0.1667,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 14060.8
+  },
+  "llm_tools": {
+    "n": 24,
+    "parsed": 23,
+    "numeric_correct": 23,
+    "numeric_accuracy": 0.9583,
+    "relevance_mean": 0.9479,
+    "tool_selection_ok": 23,
+    "verifiable_numbers": 225,
+    "mean_elapsed_ms": 17054.91
+  },
+  "errors": [
+    {
+      "id": "A02",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ... day IN (0,1,2,3,4) AND release_min BETWEEN 420 AND 540 AND hour_bucket = 1 AN"
+    },
+    {
+      "id": "A03",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"JOIN\"\n\nLINE 6: JOIN trajectory_points ON filtered_orders.order_id = trajec...\n        ^^^^"
+    },
+    {
+      "id": "A04",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced table \"o\" not found!\n\nLINE 20:     MAX(o.hour_bucket) * 60 + MAX(o.t_min) - 900 AS peak_time,\n                 ^^^^^^^^^^^^^"
+    },
+    {
+      "id": "A05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 10: WHERE trajectory_points.day = 0 AND filtered_orders.hour_bucket = 15;\n          "
+    },
+    {
+      "id": "A05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: column \"release_min\" must appear in the GROUP BY clause or must be part of an aggregate function.\nEither add it to the GROUP BY list, or use ANY_VALUE(\"release_min\") if the exact value o"
+    },
+    {
+      "id": "A08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 1: ... AND trajectory_points.seq = 0 WHERE orders.hour_bucket BETWEEN 3 AND 9"
+    },
+    {
+      "id": "S02",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"end\"\n\nLINE 9: WHERE t_min >= start AND t_min < end;\n                                         ^^^"
+    },
+    {
+      "id": "S02",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Values list \"nfz\" does not have a column named \"day\"\n\nLINE 20:       JOIN active_windows nfz ON tp.day = nfz.day AND tp.t_min >= nfz.active_from_min AND tp.t_min...\n                     "
+    },
+    {
+      "id": "S03",
+      "arm": "llm_sql",
+      "reason": "SQL failed: CatalogException: Catalog Error: Scalar Function with name \"st_contains\" is not in the catalog, but it exists in the spatial extension.\n\nPlease try installing and loading the spatial extension:\nINSTALL spatial;\nLOAD sp"
+    },
+    {
+      "id": "S03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 4:             COUNT(*)\n                    ^^^^^^^^"
+    },
+    {
+      "id": "S04",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"t_min\" not found in FROM clause!\nCandidate bindings: \"count_star()\"\n\nLINE 8: WHERE t_min >= 480 AND t_min < 1020\n              ^^^^^"
+    },
+    {
+      "id": "S06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"day\" (use: 'trajectory_points.\"day\"' or 'orders.\"day\"')\n\nLINE 10:         seq = 0 AND day = 0 AND phase = 'cruise'\n                             ^^^"
+    },
+    {
+      "id": "S07",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 5:     WHERE o.day = 0 AND o.hour_bucket = 3\n                                ^^^^^^^"
+    },
+    {
+      "id": "S08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"origin_node_id\" not found in FROM clause!\nCandidate bindings: \"customer_node_id\", \"order_id\", \"hour_bucket\", \"service_min\", \"earliest_min\"\n\nLINE 2:     SELECT order_id"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"DESC\"\n\nLINE 21:         peak_weight DESC\n                             ^^^^"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Table \"op\" does not have a column named \"hour_bucket\"\n\nCandidate bindings: : \"lat\"\n\nLINE 13:         op.hour_bucket, op.origin_node_id\n                 ^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "C02",
+      "arm": "llm_sql_focused",
+      "reason": "rejected: not a read-only SELECT/WITH"
+    },
+    {
+      "id": "C03",
+      "arm": "llm_tools",
+      "reason": "bad JSON: Expecting ',' delimiter: line 1 column 81 (char 80)"
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"FROM\"\n\nLINE 24:     FROM\n             ^^^^"
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: column \"total_orders\" must appear in the GROUP BY clause or must be part of an aggregate function.\nEither add it to the GROUP BY list, or use ANY_VALUE(\"total_orders\") if the exact value"
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 4:     WHERE o.day = 0 AND o.hour_bucket BETWEEN 420 AND 540\n                "
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"C\"\n\nLINE 30:     SUM(C\n                 ^"
+    },
+    {
+      "id": "C08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"dominant_layer_share\"\n\nLINE 15:     SELECT MAX(n) * 100.0 / SUM(n) AS dominant_layer_share\n                                               ^^^^^^^^^^^^^^^^^^^^"
+    }
+  ],
+  "meta": {
+    "questions": 24,
+    "repeats": 1,
+    "model": "qwen2.5-7b-instruct-q3_k_m.gguf",
+    "engine": "llama.cpp CPU",
+    "endpoint": "http://127.0.0.1:8081",
+    "temperature": 0,
+    "seed": 42,
+    "api_key_required": false,
+    "data_left_host": false,
+    "fairness": "llm_sql and llm_tools receive identical schema + all definitions; llm_sql_focused is a favourable ABLATION (only the definitions relevant to that question), used to test whether the SQL arm's failure is a long-prompt artefact",
+    "tool_arm_validation": "typed params are validated against schema: day 0..4, HH:MM within 07:00-19:00, zone_id whitelist, traj_id pattern",
+    "orchestration": "replayed with normalize_tool_params v2 (prune hallucinated params AND fill question-derived day/time-window/zone); raw model outputs unchanged"
+  },
+  "by_category_accuracy": {
+    "aggregation": {
+      "llm_sql": 0.375,
+      "llm_sql_focused": 0.125,
+      "llm_tools": 1.0
+    },
+    "spatial": {
+      "llm_sql": 0.125,
+      "llm_sql_focused": 0.375,
+      "llm_tools": 1.0
+    },
+    "composite": {
+      "llm_sql": 0.125,
+      "llm_sql_focused": 0.0,
+      "llm_tools": 0.875
+    }
+  }
+}

@@ -1,0 +1,48 @@
+# 上游改动与贡献边界（导出自原仓库 git）
+
+说明：完整包内含 .git 目录，可直接 git status / git diff。
+轻量包不含 .git，故在此保存改动清单与真实 patch。
+
+## git status --short
+
+```
+ M packages/verify/src/recompute.ts
+?? EVAL_REPORT.md
+?? RESUME.md
+?? lowalt/
+?? packages/verify/src/lowaltitude-rules.ts
+```
+
+## git diff packages/verify/src/recompute.ts
+
+```diff
+diff --git a/packages/verify/src/recompute.ts b/packages/verify/src/recompute.ts
+index 5885666..8f3ef2e 100644
+--- a/packages/verify/src/recompute.ts
++++ b/packages/verify/src/recompute.ts
+@@ -23,6 +23,9 @@ import { marginValue } from "@agentic-analytics/metrics";
+ import type { Fact } from "@agentic-analytics/schema";
+ import type { Workspace } from "@agentic-analytics/store";
+ import { recheckStat, statOf } from "./concentration-check.ts";
++// Secondary development (lowalt/): mirror rules for the three low-altitude
++// analysis functions. Without them V2 fails closed, by upstream design.
++import { LOWALT_RULES } from "./lowaltitude-rules.ts";
+ 
+ export const TOLERANCE = 1e-9;
+ 
+@@ -241,7 +244,7 @@ export async function recomputeFacts(ws: Workspace, facts: readonly Fact[], all:
+       out.push({ fact: f.id, stored: f.value, computed: r.value, ok: same(f.value, r.value), how: r.how });
+       continue;
+     }
+-    const rule = RULES[fn];
++    const rule = RULES[fn] ?? LOWALT_RULES[fn];
+     if (!rule) {
+       out.push({ fact: f.id, stored: f.value, computed: Number.NaN, ok: false, how: `no recompute rule for ${fn || "(none)"}` });
+       continue;
+```
+
+## 新增文件
+
+其余全部为新增：lowalt/、EVAL_REPORT.md、RESUME.md、
+packages/verify/src/lowaltitude-rules.ts。
+模型层、core 状态机、agent、report 与既有验证规则均未修改。

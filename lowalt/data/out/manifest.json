@@ -1,0 +1,95 @@
+{
+  "dataset": "Shenzhen Qianhai truck-drone low-altitude logistics case",
+  "source_record": "IEEE DataPort DOI 10.21227/3gxb-mj63",
+  "license": "CC BY 4.0",
+  "source_artifact": "public DATASET SCRIPTS archive (build_case_script.zip)",
+  "source_script": "lowalt/data/ieee_build_case.py",
+  "source_script_sha256": "5e35063f91d032f867899cb195cbe102e0be4c5ab7cda4f1ce2568cc49ab6cb0",
+  "access_note": "Main 53.1 KB scenario archive requires IEEE SAML login; the public scripts archive embeds all geographic and stochastic parameters. Companion dagcd GitHub repo linked on the record returns HTTP 404, so the published generating process is reproduced here with the standard library.",
+  "published_parameters_used": {
+    "n_nodes": 27,
+    "n_no_fly_zones": 2,
+    "release_segments": [
+      [
+        30.0,
+        150.0,
+        0.09
+      ],
+      [
+        150.0,
+        570.0,
+        0.03
+      ],
+      [
+        570.0,
+        720.0,
+        0.14
+      ]
+    ],
+    "order_seeds": [
+      2026092302,
+      1,
+      2,
+      3,
+      4
+    ],
+    "weather_chain": {
+      "clear": [
+        0.55,
+        0.2,
+        0.2,
+        0.05
+      ],
+      "windy": [
+        0.3,
+        0.35,
+        0.25,
+        0.1
+      ],
+      "rain": [
+        0.25,
+        0.25,
+        0.35,
+        0.15
+      ],
+      "storm": [
+        0.25,
+        0.3,
+        0.3,
+        0.15
+      ]
+    },
+    "mean_event_min": 40.0,
+    "sim_end_min": 720.0,
+    "circuity_mean_documented": 1.724,
+    "circuity_std_documented": 0.537,
+    "circuity_applied_to_coordinates": false
+  },
+  "derived_notice": "orders rows are sampled from the published seeded process; trajectory_points.csv is a DERIVED deterministic interpolation between published vertiports and customer nodes, not measured flight data. See lowalt/data/SOURCES.md.",
+  "frames": {
+    "spatial": "WGS-84 lat/lon + equirectangular local metres anchored at 22.55N 113.93E",
+    "time": "minutes since 07:00 local; 07:00-19:00 horizon"
+  },
+  "tables": {
+    "nodes.csv": {
+      "rows": 27,
+      "sha256": "431c3f5096f7e8871c118ee55e79c2d6f0e6cb7f173ecfc86b87b6c32466b8c1"
+    },
+    "no_fly_zones.csv": {
+      "rows": 9,
+      "sha256": "ef03f0b10abeedb07ac0bb20b787c8c121374af3910729bf48eb60e88d1e209d"
+    },
+    "orders.csv": {
+      "rows": 233,
+      "sha256": "37e63b3028c66a54c8cc938cfcdbbc72643e3d953141152df336607b8cfda9c1"
+    },
+    "trajectory_points.csv": {
+      "rows": 2097,
+      "sha256": "59e47ae76d214d11da04c26f124c91e9cc946258219341bbe4445ba8c078cff8"
+    },
+    "congestion.csv": {
+      "rows": 6,
+      "sha256": "ea02f5c8fd90d10c9eab8460964cdf6b550af2ed774066e7f1bda6dc8651e5e3"
+    }
+  }
+}

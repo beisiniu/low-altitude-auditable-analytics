@@ -1,0 +1,153 @@
+{
+  "by_category": {
+    "aggregation": {
+      "baseline": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 0.3125,
+        "verifiable_numbers": 8,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 1.0,
+        "mean_elapsed_ms": 3.129
+      },
+      "lowalt": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 1.0,
+        "verifiable_numbers": 132,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 2.0,
+        "mean_elapsed_ms": 34.105
+      },
+      "delta": {
+        "numeric_accuracy_pp": 0.0,
+        "relevance_pp": 68.75,
+        "verifiable_numbers_x": 16.5
+      }
+    },
+    "spatial": {
+      "baseline": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 0.5521,
+        "verifiable_numbers": 8,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 1.625,
+        "mean_elapsed_ms": 3.837
+      },
+      "lowalt": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 1.0,
+        "verifiable_numbers": 20,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 2.625,
+        "mean_elapsed_ms": 5.345
+      },
+      "delta": {
+        "numeric_accuracy_pp": 0.0,
+        "relevance_pp": 44.79,
+        "verifiable_numbers_x": 2.5
+      }
+    },
+    "composite": {
+      "baseline": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 0.3333,
+        "verifiable_numbers": 8,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 1.0,
+        "mean_elapsed_ms": 4.063
+      },
+      "lowalt": {
+        "n": 8,
+        "numeric_correct": 8,
+        "numeric_accuracy": 1.0,
+        "relevance_mean": 0.9688,
+        "verifiable_numbers": 90,
+        "v2_pass_rate": 1.0,
+        "tool_selection_ok": 8,
+        "resolver_exact": 8,
+        "resolver_ambiguous": 0,
+        "resolver_unresolved": 0,
+        "mean_steps": 2.0,
+        "mean_elapsed_ms": 19.93
+      },
+      "delta": {
+        "numeric_accuracy_pp": 0.0,
+        "relevance_pp": 63.55,
+        "verifiable_numbers_x": 11.25
+      }
+    }
+  },
+  "overall": {
+    "baseline": {
+      "n": 24,
+      "numeric_correct": 24,
+      "numeric_accuracy": 1.0,
+      "relevance_mean": 0.3993,
+      "verifiable_numbers": 24,
+      "v2_pass_rate": 1.0,
+      "tool_selection_ok": 24,
+      "resolver_exact": 24,
+      "resolver_ambiguous": 0,
+      "resolver_unresolved": 0,
+      "mean_steps": 1.208,
+      "mean_elapsed_ms": 3.676
+    },
+    "lowalt": {
+      "n": 24,
+      "numeric_correct": 24,
+      "numeric_accuracy": 1.0,
+      "relevance_mean": 0.9896,
+      "verifiable_numbers": 242,
+      "v2_pass_rate": 1.0,
+      "tool_selection_ok": 24,
+      "resolver_exact": 24,
+      "resolver_ambiguous": 0,
+      "resolver_unresolved": 0,
+      "mean_steps": 2.208,
+      "mean_elapsed_ms": 19.793
+    },
+    "delta": {
+      "numeric_accuracy_pp": 0.0,
+      "relevance_pp": 59.03,
+      "verifiable_numbers_x": 10.08
+    }
+  },
+  "failures": [],
+  "meta": {
+    "questions": 24,
+    "model": "none (rule-based resolver, deterministic)",
+    "llm_calls": 0,
+    "python": "3.13",
+    "duckdb": "v2.0.0",
+    "data_manifest": "E:\\lowalt-github\\lowalt\\data\\out\\manifest.json"
+  }
+}

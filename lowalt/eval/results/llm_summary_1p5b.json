@@ -1,0 +1,215 @@
+{
+  "llm_sql": {
+    "n": 24,
+    "parsed": 7,
+    "numeric_correct": 0,
+    "numeric_accuracy": 0.0,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 5266.34
+  },
+  "llm_sql_focused": {
+    "n": 24,
+    "parsed": 11,
+    "numeric_correct": 4,
+    "numeric_accuracy": 0.1667,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 3083.1
+  },
+  "llm_tools": {
+    "n": 24,
+    "parsed": 24,
+    "numeric_correct": 22,
+    "numeric_accuracy": 0.9167,
+    "relevance_mean": 0.9549,
+    "tool_selection_ok": 22,
+    "verifiable_numbers": 215,
+    "mean_elapsed_ms": 4329.73
+  },
+  "errors": [
+    {
+      "id": "A01",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 5:   AND hour_bucket IN (0, 1, 2, 3, 4);\n              ^^^^^^^^^^^"
+    },
+    {
+      "id": "A01",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 5:   AND hour_bucket BETWEEN 0 AND 18\n                          ^^^^^^^^^^^^^"
+    },
+    {
+      "id": "A03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"JOIN\"\n\nLINE 16:     JOIN\n             ^^^^"
+    },
+    {
+      "id": "A04",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '17:00-18:00' to INT32 when casting from source column hour_bucket\n\nLINE 7:   day = 4 AND hour_bucket = 6 AND release_min >= 600 AND release_min ...\n        "
+    },
+    {
+      "id": "A04",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Table \"o\" does not have a column named \"origin_node_id\"\n\nCandidate bindings: : \"order_id\"\n\nLINE 5: GROUP BY o.hour_bucket, o.origin_node_id\n                                ^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "A05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 4:   AND hour_bucket IN (14, 15, 16)\n              ^^^^^^^^^^^"
+    },
+    {
+      "id": "A05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 4:   AND hour_bucket = 480;\n              ^^^^^^^^^^^"
+    },
+    {
+      "id": "A06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot compare values of type VARCHAR and type INTEGER_LITERAL - an explicit cast is required\n\nLINE 3: WHERE day = 2 AND hour_bucket >= 420 AND hour_bucket < 480 AND release_min...\n     "
+    },
+    {
+      "id": "A06",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot compare values of type VARCHAR and type INTEGER_LITERAL - an explicit cast is required\n\nLINE 3: WHERE day = 2 AND hour_bucket >= 420 AND hour_bucket < 540 AND release_min...\n     "
+    },
+    {
+      "id": "A08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 4:   AND hour_bucket IN (3, 4, 5, 6, 7)\n              ^^^^^^^^^^^"
+    },
+    {
+      "id": "S03",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"s_min\" not found in FROM clause!\nCandidate bindings: \"t_min\", \"customer_node_id\", \"t_hhmm\", \"seq\"\n\nLINE 1: SELECT SUM(t_min - s_min) AS total_minutes\n                 "
+    },
+    {
+      "id": "S03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"release_min\" not found in FROM clause!\nCandidate bindings: \"traj_id\", \"leg_m\", \"order_id\", \"customer_node_id\", \"no_fly_zones.lat\"\n\nLINE 1: SELECT SUM(t_min - release_m"
+    },
+    {
+      "id": "S05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 3: ...HERE t_min >= 600 AND t_min < 720"
+    },
+    {
+      "id": "S05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 3: WHERE t_min >= 600 AND t_min < 720 A"
+    },
+    {
+      "id": "S06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"n\" not found in FROM clause!\nCandidate bindings: \"origin_node_id\"\n\nLINE 3:      SUM(n) \n                 ^"
+    },
+    {
+      "id": "S06",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \":\"\n\nLINE 18:             14:00 AND \n                       ^"
+    },
+    {
+      "id": "S08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 6:     WHEN phase = 'cruise' THEN COUNT(*) \n                                       ^^^^^^^^"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \",\"\n\nLINE 27:   ),\n            ^"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"BY\"\n\nLINE 24:     GROUP BY\n                   ^^"
+    },
+    {
+      "id": "C02",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 9:     hour_bucket BETWEEN 17 AND 19;\n                        ^^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "C03",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Table \"tp\" does not have a column named \"release_min\"\n\nCandidate bindings: : \"leg_m\"\n\nLINE 4: WHERE tp.day = 4 AND tp.release_min >= 480 AND tp.release_min < 540\n                        "
+    },
+    {
+      "id": "C03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '15:00-16:00' to INT32 when casting from source column hour_bucket\n\nLINE 6:   AND hour_bucket = 3\n              ^^^^^^^^^^^"
+    },
+    {
+      "id": "C04",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 6:     hour_bucket BETWEEN 480 AND 660\n                        ^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 7:     day = 2 AND hour_bucket IN (420, 480, 540, 600, 660)\n                        "
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Cannot mix values of type VARCHAR and INTEGER_LITERAL in BETWEEN clause - an explicit cast is required\n\nLINE 18:     hour_bucket BETWEEN 420 AND 540\n                         ^^^^^^^^^^^^"
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 16:     day = 0 AND hour_bucket = 4 AND release_min >= 420 AND release_min ...\n     "
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"day\" (use: 'orders.\"day\"' or 'trajectory_points.\"day\"')\n\nLINE 8:     day = 0 AND hour_bucket BETWEEN 4 AND 4 AND release_min...\n            ^^^"
+    },
+    {
+      "id": "C07",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 2: ... phase = 'cruise' THEN t_min ELSE NULL END) * 100.0) / SUM(COUNT(CASE WHEN phase = 'cruise' THEN t_min ELSE NULL END))\n             "
+    },
+    {
+      "id": "C08",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"n\" not found in FROM clause!\nCandidate bindings: \"origin_node_id\"\n\nLINE 3:         SUM(n) \n                    ^"
+    },
+    {
+      "id": "C08",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"hour_bucket\" not found in FROM clause!\nCandidate bindings: \"origin_node_id\", \"order_id\", \"customer_node_id\"\n\nLINE 9:         day = 0 AND hour_bucket >= 17 AND hour_buc"
+    }
+  ],
+  "meta": {
+    "questions": 24,
+    "repeats": 1,
+    "model": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+    "engine": "llama.cpp CPU",
+    "endpoint": "http://127.0.0.1:8081",
+    "temperature": 0,
+    "seed": 42,
+    "api_key_required": false,
+    "data_left_host": false,
+    "fairness": "llm_sql and llm_tools receive identical schema + all definitions; llm_sql_focused is a favourable ABLATION (only the definitions relevant to that question), used to test whether the SQL arm's failure is a long-prompt artefact",
+    "tool_arm_validation": "typed params are validated against schema: day 0..4, HH:MM within 07:00-19:00, zone_id whitelist, traj_id pattern",
+    "orchestration": "replayed with normalize_tool_params v2 (prune hallucinated params AND fill question-derived day/time-window/zone); raw model outputs unchanged"
+  },
+  "by_category_accuracy": {
+    "aggregation": {
+      "llm_sql": 0.0,
+      "llm_sql_focused": 0.25,
+      "llm_tools": 1.0
+    },
+    "spatial": {
+      "llm_sql": 0.0,
+      "llm_sql_focused": 0.25,
+      "llm_tools": 1.0
+    },
+    "composite": {
+      "llm_sql": 0.0,
+      "llm_sql_focused": 0.0,
+      "llm_tools": 0.75
+    }
+  }
+}

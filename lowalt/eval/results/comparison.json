@@ -1,0 +1,1948 @@
+[
+  {
+    "id": "A01",
+    "category": "aggregation",
+    "question": "全部 5 天 07:00—19:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "total",
+    "golden": 233.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 233.0,
+      "answer": "233",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.084,
+      "evidence_digest": "89a7c03a8526669f",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 233.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 233,
+      "answer": "窗口内 233 单；峰值 31 单出现在 18:00-19:00、起降节点 1（29 个分组，12 个时段，3 个节点）",
+      "facts_published": 46,
+      "v2_passed": 46,
+      "v2_total": 46,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 95.972,
+      "evidence_digest": "94c5b8b9a2d9a4d5",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 233.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A02",
+    "category": "aggregation",
+    "question": "全部 5 天 14:00—16:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "total",
+    "golden": 21.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 21.0,
+      "answer": "21",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.118,
+      "evidence_digest": "8bcbf51f4214866c",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 21.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 21,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 25.168,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 21.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A03",
+    "category": "aggregation",
+    "question": "14:00—16:00 的配送需求峰值出现在哪个起降节点，峰值是多少单？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "peak",
+    "golden": 9.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 9.0,
+      "answer": "9",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 6.901,
+      "evidence_digest": "e7963340560d283e",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 9.0,
+      "relevance_score": 0.25
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 9,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 24.886,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 9.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A04",
+    "category": "aggregation",
+    "question": "17:00—19:00 晚高峰的配送需求峰值是多少单？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "peak",
+    "golden": 31.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 31.0,
+      "answer": "31",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 7.109,
+      "evidence_digest": "191aafd37a5b008f",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 31.0,
+      "relevance_score": 0.25
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 31,
+      "answer": "窗口内 100 单；峰值 31 单出现在 18:00-19:00、起降节点 1（6 个分组，2 个时段，3 个节点）",
+      "facts_published": 13,
+      "v2_passed": 13,
+      "v2_total": 13,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 27.943,
+      "evidence_digest": "05812ba4337b68ba",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 31.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A05",
+    "category": "aggregation",
+    "question": "14:00—16:00 按小时分解，15:00—16:00 这一小时的配送量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "by_hour.15:00-16:00",
+    "golden": 16.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 16.0,
+      "answer": "16",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.055,
+      "evidence_digest": "e059501384304e0c",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "breakdown": false
+      },
+      "numeric_correct": true,
+      "golden": 16.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 16,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 24.323,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 16.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A06",
+    "category": "aggregation",
+    "question": "14:00—16:00 从起降节点 1 起飞的配送订单有多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "by_node.1",
+    "golden": 11.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 3
+      },
+      "tool_selection_ok": true,
+      "value": 11.0,
+      "answer": "11",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 5.419,
+      "evidence_digest": "5874613969a6cc2a",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "breakdown": false
+      },
+      "numeric_correct": true,
+      "golden": 11.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 3
+      },
+      "tool_selection_ok": true,
+      "value": 11,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 24.632,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 11.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A07",
+    "category": "aggregation",
+    "question": "第 0 天 14:00—16:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "total",
+    "golden": 4.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 4.0,
+      "answer": "4",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.239,
+      "evidence_digest": "7e122fd9eab6d6db",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 4.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 4,
+      "answer": "窗口内 4 单；峰值 2 单出现在 15:00-16:00、起降节点 1（3 个分组，2 个时段，2 个节点）",
+      "facts_published": 9,
+      "v2_passed": 9,
+      "v2_total": 9,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 17.387,
+      "evidence_digest": "d9ecd34d75fe58b0",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 4.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "A08",
+    "category": "aggregation",
+    "question": "早高峰 07:30—09:30 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "total",
+    "golden": 50.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 50.0,
+      "answer": "50",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.104,
+      "evidence_digest": "b8f77f0d1345df2b",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 50.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 50,
+      "answer": "窗口内 50 单；峰值 11 单出现在 08:00-09:00、起降节点 1（8 个分组，3 个时段，3 个节点）",
+      "facts_published": 16,
+      "v2_passed": 16,
+      "v2_total": 16,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 32.526,
+      "evidence_digest": "34044ef6c197e358",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 50.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S01",
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区的冲突次数是多少？",
+    "expected_tool": "no_fly_conflict_count",
+    "extract": "events",
+    "golden": 0.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "bbox_conflict_approx",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 8,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0,
+      "answer": "bbox 近似冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 5.373,
+      "evidence_digest": "e86e8ab0709c5c90",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "definition": false,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 0.6666666666666666
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "no_fly_conflict_count",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 8,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0,
+      "answer": "冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 3,
+      "elapsed_ms": 6.263,
+      "evidence_digest": "13ea519ba1d7bc69",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "definition": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S02",
+    "category": "spatial",
+    "question": "全部轨迹落入禁飞区的命中点有多少个？",
+    "expected_tool": "no_fly_conflict_count",
+    "extract": "points",
+    "golden": 0.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "bbox_conflict_approx",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 7,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0,
+      "answer": "bbox 近似冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 5.007,
+      "evidence_digest": "e86e8ab0709c5c90",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "definition": false,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 0.6666666666666666
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "no_fly_conflict_count",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 7,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0,
+      "answer": "冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 3,
+      "elapsed_ms": 6.115,
+      "evidence_digest": "13ea519ba1d7bc69",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "definition": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S03",
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区冲突的累计时长是多少分钟？",
+    "expected_tool": "no_fly_conflict_count",
+    "extract": "minutes",
+    "golden": 0.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "bbox_conflict_approx",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 8,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0.0,
+      "answer": "bbox 近似冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 5.075,
+      "evidence_digest": "e86e8ab0709c5c90",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "definition": false,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 0.6666666666666666
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "no_fly_conflict_count",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 8,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 0.0,
+      "answer": "冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 1741 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 3,
+      "elapsed_ms": 6.191,
+      "evidence_digest": "13ea519ba1d7bc69",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "definition": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 0.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S04",
+    "category": "spatial",
+    "question": "机场禁飞区激活时段 15:00—18:00 内共有多少个轨迹点？",
+    "expected_tool": "no_fly_conflict_count",
+    "extract": "window_points",
+    "golden": 821.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "bbox_conflict_approx",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 3,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 821,
+      "answer": "bbox 近似冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 821 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.468,
+      "evidence_digest": "92edb97542aad1ff",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 821.0,
+      "relevance_score": 0.6666666666666666
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "no_fly_conflict_count",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 3,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 821,
+      "answer": "冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 821 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 3,
+      "elapsed_ms": 5.085,
+      "evidence_digest": "22492f2f17f443c8",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 821.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S05",
+    "category": "spatial",
+    "question": "宝安体育馆临时禁飞区激活时段 17:00—19:00 内共有多少个轨迹点？",
+    "expected_tool": "no_fly_conflict_count",
+    "extract": "window_points",
+    "golden": 920.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "bbox_conflict_approx",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 3,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 920,
+      "answer": "bbox 近似冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 920 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.296,
+      "evidence_digest": "699c12a962d2ac48",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 920.0,
+      "relevance_score": 0.6666666666666666
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "no_fly_conflict_count",
+      "resolver_selected": "no_fly_conflict_count",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 3,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 920,
+      "answer": "冲突 0 次（0 个命中点，累计 0.0 分钟）；激活窗口内轨迹点 920 个",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 3,
+      "elapsed_ms": 5.069,
+      "evidence_digest": "98adefbd52c90ad3",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_zone",
+        "events",
+        "minutes",
+        "points",
+        "window_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 920.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S06",
+    "category": "spatial",
+    "question": "第 0 天巡航高度层中主导层的占比是多少？",
+    "expected_tool": "altitude_distribution",
+    "extract": "dominant_share_pct",
+    "golden": 38.46153846153846,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 38.46153846153846,
+      "answer": "38.4615",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 3.119,
+      "evidence_digest": "679e938181c1240a",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "definition": false,
+        "breakdown": false
+      },
+      "numeric_correct": true,
+      "golden": 38.46153846153846,
+      "relevance_score": 0.25
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "altitude_distribution",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 38.461538,
+      "answer": "主导高度层 060-075m，100/260 个巡航点，占 38.46%",
+      "facts_published": 5,
+      "v2_passed": 5,
+      "v2_total": 5,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.817,
+      "evidence_digest": "ff3c9bb96a97c389",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_layer",
+        "cruise_ratio_pct",
+        "dominant_count",
+        "dominant_layer",
+        "dominant_share_pct",
+        "total_cruise_points",
+        "total_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "definition": true,
+        "breakdown": true
+      },
+      "numeric_correct": true,
+      "golden": 38.46153846153846,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S07",
+    "category": "spatial",
+    "question": "第 0 天共有多少个巡航阶段轨迹点？",
+    "expected_tool": "altitude_distribution",
+    "extract": "total_cruise_points",
+    "golden": 260.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 3,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 260.0,
+      "answer": "260",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.178,
+      "evidence_digest": "c7d288886e20f8d0",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 260.0,
+      "relevance_score": 0.5
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "altitude_distribution",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 3,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 260,
+      "answer": "主导高度层 060-075m，100/260 个巡航点，占 38.46%",
+      "facts_published": 5,
+      "v2_passed": 5,
+      "v2_total": 5,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.654,
+      "evidence_digest": "ff3c9bb96a97c389",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_layer",
+        "cruise_ratio_pct",
+        "dominant_count",
+        "dominant_layer",
+        "dominant_share_pct",
+        "total_cruise_points",
+        "total_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 260.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "S08",
+    "category": "spatial",
+    "question": "第 0 天主导高度层包含多少个巡航点？",
+    "expected_tool": "altitude_distribution",
+    "extract": "dominant_count",
+    "golden": 100.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 100.0,
+      "answer": "100",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 2.183,
+      "evidence_digest": "134fa7c335980763",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 100.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "altitude_distribution",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 0
+      },
+      "tool_selection_ok": true,
+      "value": 100,
+      "answer": "主导高度层 060-075m，100/260 个巡航点，占 38.46%",
+      "facts_published": 5,
+      "v2_passed": 5,
+      "v2_total": 5,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.569,
+      "evidence_digest": "ff3c9bb96a97c389",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_layer",
+        "cruise_ratio_pct",
+        "dominant_count",
+        "dominant_layer",
+        "dominant_share_pct",
+        "total_cruise_points",
+        "total_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 100.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C01",
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值所在时段，是否与机场禁飞区激活时段 15:00—18:00 重叠？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "peak_overlap",
+    "golden": 1.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 1.0,
+      "answer": "1",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 12.141,
+      "evidence_digest": "f662783a3a1f9580",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 1.0,
+      "relevance_score": 0.25
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 5
+      },
+      "tool_selection_ok": true,
+      "value": 1.0,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 22.643,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 1.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C02",
+    "category": "composite",
+    "question": "17:00—19:00 晚高峰订单量占全天的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "window_share",
+    "golden": 42.918454935622314,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 42.918454935622314,
+      "answer": "42.9185",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.882,
+      "evidence_digest": "db9cb47c3bb689de",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 42.918454935622314,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 42.91845493562232,
+      "answer": "窗口内 100 单；峰值 31 单出现在 18:00-19:00、起降节点 1（6 个分组，2 个时段，3 个节点）",
+      "facts_published": 13,
+      "v2_passed": 13,
+      "v2_total": 13,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 24.499,
+      "evidence_digest": "05812ba4337b68ba",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 42.918454935622314,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C03",
+    "category": "composite",
+    "question": "禁飞区活跃的 15:00—18:00 窗口内共有多少配送订单？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "total",
+    "golden": 95.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 3
+      },
+      "tool_selection_ok": true,
+      "value": 95.0,
+      "answer": "95",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.074,
+      "evidence_digest": "5507aed4b7f31645",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 95.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 3
+      },
+      "tool_selection_ok": true,
+      "value": 95,
+      "answer": "窗口内 95 单；峰值 26 单出现在 17:00-18:00、起降节点 1（9 个分组，3 个时段，3 个节点）",
+      "facts_published": 17,
+      "v2_passed": 17,
+      "v2_total": 17,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 32.223,
+      "evidence_digest": "6bbbf72bb6984c6f",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 95.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C04",
+    "category": "composite",
+    "question": "15:00—18:00 窗口内的订单量占全天的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "window_share",
+    "golden": 40.772532188841204,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 40.772532188841204,
+      "answer": "40.7725",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.886,
+      "evidence_digest": "dc5e98e47d7ed07b",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 40.772532188841204,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 4
+      },
+      "tool_selection_ok": true,
+      "value": 40.772532188841204,
+      "answer": "窗口内 95 单；峰值 26 单出现在 17:00-18:00、起降节点 1（9 个分组，3 个时段，3 个节点）",
+      "facts_published": 17,
+      "v2_passed": 17,
+      "v2_total": 17,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 31.048,
+      "evidence_digest": "6bbbf72bb6984c6f",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "window": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 40.772532188841204,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C05",
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值分组占该窗口订单总量的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "peak_share",
+    "golden": 42.857142857142854,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 6
+      },
+      "tool_selection_ok": true,
+      "value": 42.857142857142854,
+      "answer": "42.8571",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 5.929,
+      "evidence_digest": "cf93e8a109f5994d",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 42.857142857142854,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 6
+      },
+      "tool_selection_ok": true,
+      "value": 42.857142857142854,
+      "answer": "窗口内 21 单；峰值 9 单出现在 15:00-16:00、起降节点 1（5 个分组，2 个时段，3 个节点）",
+      "facts_published": 12,
+      "v2_passed": 12,
+      "v2_total": 12,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 22.547,
+      "evidence_digest": "3a29165118464092",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 42.857142857142854,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C06",
+    "category": "composite",
+    "question": "第 0 天 14:00—16:00 峰值分组占该日该窗口订单总量的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "extract": "peak_share",
+    "golden": 50.0,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 6
+      },
+      "tool_selection_ok": true,
+      "value": 50.0,
+      "answer": "50",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 5.225,
+      "evidence_digest": "872dfc409f927990",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 50.0,
+      "relevance_score": 0.3333333333333333
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "drone_demand_aggregate",
+      "resolver_selected": "drone_demand_aggregate",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 0,
+        "drone_demand_aggregate": 6
+      },
+      "tool_selection_ok": true,
+      "value": 50.0,
+      "answer": "窗口内 4 单；峰值 2 单出现在 15:00-16:00、起降节点 1（3 个分组，2 个时段，2 个节点）",
+      "facts_published": 9,
+      "v2_passed": 9,
+      "v2_total": 9,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 16.585,
+      "evidence_digest": "d9ecd34d75fe58b0",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_hour",
+        "by_node",
+        "n_groups",
+        "peak",
+        "peak_hour",
+        "peak_node",
+        "total"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 50.0,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C07",
+    "category": "composite",
+    "question": "第 0 天巡航阶段轨迹点占全部轨迹点的百分比是多少？",
+    "expected_tool": "altitude_distribution",
+    "extract": "cruise_ratio_pct",
+    "golden": 55.55555555555556,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 3,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 55.55555555555556,
+      "answer": "55.5556",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 1.558,
+      "evidence_digest": "c5bf2bec9058c9a1",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 55.55555555555556,
+      "relevance_score": 0.5
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "altitude_distribution",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 3,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 55.555556,
+      "answer": "主导高度层 060-075m，100/260 个巡航点，占 38.46%",
+      "facts_published": 5,
+      "v2_passed": 5,
+      "v2_total": 5,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 4.381,
+      "evidence_digest": "ff3c9bb96a97c389",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_layer",
+        "cruise_ratio_pct",
+        "dominant_count",
+        "dominant_layer",
+        "dominant_share_pct",
+        "total_cruise_points",
+        "total_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 55.55555555555556,
+      "relevance_score": 1.0
+    }
+  },
+  {
+    "id": "C08",
+    "category": "composite",
+    "question": "第 0 天 17:00—19:00 窗口内主导巡航高度层的占比是多少？",
+    "expected_tool": "altitude_distribution",
+    "extract": "dominant_share_pct",
+    "golden": 54.166666666666664,
+    "baseline": {
+      "arm": "baseline",
+      "tool_used": "sql_aggregate",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 54.166666666666664,
+      "answer": "54.1667",
+      "facts_published": 1,
+      "v2_passed": 1,
+      "v2_total": 1,
+      "v2_pass_rate": 1.0,
+      "steps": 1,
+      "elapsed_ms": 2.809,
+      "evidence_digest": "5c7e28408e560bcb",
+      "value_is_dict": false,
+      "value_keys": [],
+      "has_definition": false,
+      "relevance": {
+        "value": true,
+        "dimension": false,
+        "window": false,
+        "definition": false
+      },
+      "numeric_correct": true,
+      "golden": 54.166666666666664,
+      "relevance_score": 0.25
+    },
+    "lowalt": {
+      "arm": "lowalt",
+      "tool_used": "altitude_distribution",
+      "resolver_selected": "altitude_distribution",
+      "resolver_state": "EXACT",
+      "resolver_scores": {
+        "no_fly_conflict_count": 0,
+        "altitude_distribution": 7,
+        "drone_demand_aggregate": 1
+      },
+      "tool_selection_ok": true,
+      "value": 54.166667,
+      "answer": "主导高度层 060-075m，65/120 个巡航点，占 54.17%",
+      "facts_published": 5,
+      "v2_passed": 5,
+      "v2_total": 5,
+      "v2_pass_rate": 1.0,
+      "steps": 2,
+      "elapsed_ms": 5.51,
+      "evidence_digest": "8cce0932f4535c4c",
+      "value_is_dict": true,
+      "value_keys": [
+        "by_layer",
+        "cruise_ratio_pct",
+        "dominant_count",
+        "dominant_layer",
+        "dominant_share_pct",
+        "total_cruise_points",
+        "total_points"
+      ],
+      "has_definition": true,
+      "relevance": {
+        "value": true,
+        "dimension": true,
+        "window": false,
+        "definition": true
+      },
+      "numeric_correct": true,
+      "golden": 54.166666666666664,
+      "relevance_score": 0.75
+    }
+  }
+]

@@ -1,0 +1,12 @@
+# 确定性主实验、单测、评测脚本所需（仅两个包）
+#   pip install -r requirements.txt
+duckdb>=1.0
+PyYAML>=6.0
+
+# 说明：
+# - 两篇文档的 PDF 由 tools/md2pdf.py 生成，纯标准库，无需 markdown/reportlab。
+#   只要求本机有 Chrome / Edge / Chromium 用于打印。
+# - 本地 LLM 实验不需要 Python 包，只需要独立的 llama.cpp 引擎 + GGUF 权重，
+#   见 models/README.md 与 tools/download_models.py。
+# - 上游 TypeScript 工程需要 Bun（bun install），但本项目所有实测 Python 链路
+#   不依赖它；详见 HANDOFF.md「未完事项」。

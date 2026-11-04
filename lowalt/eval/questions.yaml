@@ -1,0 +1,264 @@
+# 24 low-altitude evaluation questions (8 aggregation / 8 spatial / 8 composite)
+#
+# Every golden value is defined by an INDEPENDENT SQL query over the raw CSV
+# tables (see GOLDEN in run_eval.py) -- never by reading the tool's own output.
+# This mirrors the upstream evals/real convention: "each expected answer set by
+# SQL written separately".
+#
+# `tool`      = the tool the natural-language resolver is expected to select
+# `extract`   = which published number from ToolResult.value is the answer
+# `derive`    = a composite reducer over ToolResult.value (baseline returns None)
+# `relevance` = structured, non-LLM rubric for answer completeness
+meta:
+  version: 1
+  dataset: "IEEE DataPort 10.21227/3gxb-mj63 (public scripts archive), CC BY 4.0"
+  note: >-
+    On this published case the two no-fly zones have zero geometric
+    intersection with the delivery network, so conflict counts are legitimately
+    0 for BOTH toolchains. Geometry correctness is measured separately on
+    labelled synthetic probes in lowalt/tests/. This is intentional and is
+    reported as a data-quality finding, not hidden.
+
+questions:
+  # ---------------- aggregation ----------------
+  - id: A01
+    category: aggregation
+    question: "全部 5 天 07:00—19:00 的配送订单总量是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "07:00", to_hhmm: "19:00"}
+    extract: total
+    golden: orders_in_window
+    golden_args: {t0: 0, t1: 720}
+    relevance: [value, window, definition]
+
+  - id: A02
+    category: aggregation
+    question: "全部 5 天 14:00—16:00 的配送订单总量是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    extract: total
+    golden: orders_in_window
+    golden_args: {t0: 420, t1: 540}
+    relevance: [value, window, definition]
+
+  - id: A03
+    category: aggregation
+    question: "14:00—16:00 的配送需求峰值出现在哪个起降节点，峰值是多少单？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    extract: peak
+    golden: peak_group
+    golden_args: {t0: 420, t1: 540}
+    relevance: [value, dimension, window, definition]
+
+  - id: A04
+    category: aggregation
+    question: "17:00—19:00 晚高峰的配送需求峰值是多少单？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "17:00", to_hhmm: "19:00"}
+    extract: peak
+    golden: peak_group
+    golden_args: {t0: 600, t1: 720}
+    relevance: [value, dimension, window, definition]
+
+  - id: A05
+    category: aggregation
+    question: "14:00—16:00 按小时分解，15:00—16:00 这一小时的配送量是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    extract: "by_hour.15:00-16:00"
+    golden: orders_in_window
+    golden_args: {t0: 480, t1: 540}
+    relevance: [value, dimension, breakdown]
+
+  - id: A06
+    category: aggregation
+    question: "14:00—16:00 从起降节点 1 起飞的配送订单有多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    extract: "by_node.1"
+    golden: orders_by_node
+    golden_args: {t0: 420, t1: 540, node: 1}
+    relevance: [value, dimension, breakdown]
+
+  - id: A07
+    category: aggregation
+    question: "第 0 天 14:00—16:00 的配送订单总量是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00", day: 0}
+    extract: total
+    golden: orders_in_window_day
+    golden_args: {t0: 420, t1: 540, day: 0}
+    relevance: [value, window, definition]
+
+  - id: A08
+    category: aggregation
+    question: "早高峰 07:30—09:30 的配送订单总量是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "07:30", to_hhmm: "09:30"}
+    extract: total
+    golden: orders_in_window
+    golden_args: {t0: 30, t1: 150}
+    relevance: [value, window, definition]
+
+  # ---------------- spatial / spatio-temporal ----------------
+  - id: S01
+    category: spatial
+    question: "全部轨迹与禁飞区的冲突次数是多少？"
+    tool: no_fly_conflict_count
+    params: {}
+    extract: events
+    golden: zero_conflicts
+    golden_args: {}
+    relevance: [value, definition, breakdown]
+
+  - id: S02
+    category: spatial
+    question: "全部轨迹落入禁飞区的命中点有多少个？"
+    tool: no_fly_conflict_count
+    params: {}
+    extract: points
+    golden: zero_conflicts
+    golden_args: {}
+    relevance: [value, definition, breakdown]
+
+  - id: S03
+    category: spatial
+    question: "全部轨迹与禁飞区冲突的累计时长是多少分钟？"
+    tool: no_fly_conflict_count
+    params: {}
+    extract: minutes
+    golden: zero_conflicts
+    golden_args: {}
+    relevance: [value, definition, breakdown]
+
+  - id: S04
+    category: spatial
+    question: "机场禁飞区激活时段 15:00—18:00 内共有多少个轨迹点？"
+    tool: no_fly_conflict_count
+    params: {zone_id: "z_airport_szx"}
+    extract: window_points
+    golden: window_traj_points
+    golden_args: {t0: 480, t1: 660}
+    relevance: [value, window, definition]
+
+  - id: S05
+    category: spatial
+    question: "宝安体育馆临时禁飞区激活时段 17:00—19:00 内共有多少个轨迹点？"
+    tool: no_fly_conflict_count
+    params: {zone_id: "z_temp_baoan_event"}
+    extract: window_points
+    golden: window_traj_points
+    golden_args: {t0: 600, t1: 720}
+    relevance: [value, window, definition]
+
+  - id: S06
+    category: spatial
+    question: "第 0 天巡航高度层中主导层的占比是多少？"
+    tool: altitude_distribution
+    params: {day: 0}
+    extract: dominant_share_pct
+    golden: cruise_dominant_share
+    golden_args: {day: 0}
+    relevance: [value, dimension, definition, breakdown]
+
+  - id: S07
+    category: spatial
+    question: "第 0 天共有多少个巡航阶段轨迹点？"
+    tool: altitude_distribution
+    params: {day: 0}
+    extract: total_cruise_points
+    golden: cruise_points_day
+    golden_args: {day: 0}
+    relevance: [value, definition]
+
+  - id: S08
+    category: spatial
+    question: "第 0 天主导高度层包含多少个巡航点？"
+    tool: altitude_distribution
+    params: {day: 0}
+    extract: dominant_count
+    golden: cruise_dominant_count
+    golden_args: {day: 0}
+    relevance: [value, dimension, definition]
+
+  # ---------------- composite reasoning ----------------
+  - id: C01
+    category: composite
+    question: "14:00—16:00 需求峰值所在时段，是否与机场禁飞区激活时段 15:00—18:00 重叠？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    derive: peak_overlap
+    golden: peak_hour_overlap
+    golden_args: {t0: 420, t1: 540, w0: 480, w1: 660}
+    relevance: [value, dimension, window, definition]
+
+  - id: C02
+    category: composite
+    question: "17:00—19:00 晚高峰订单量占全天的百分比是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "17:00", to_hhmm: "19:00"}
+    derive: window_share
+    golden: window_share
+    golden_args: {t0: 600, t1: 720}
+    relevance: [value, window, definition]
+
+  - id: C03
+    category: composite
+    question: "禁飞区活跃的 15:00—18:00 窗口内共有多少配送订单？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "15:00", to_hhmm: "18:00"}
+    extract: total
+    golden: orders_in_window
+    golden_args: {t0: 480, t1: 660}
+    relevance: [value, window, definition]
+
+  - id: C04
+    category: composite
+    question: "15:00—18:00 窗口内的订单量占全天的百分比是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "15:00", to_hhmm: "18:00"}
+    derive: window_share
+    golden: window_share
+    golden_args: {t0: 480, t1: 660}
+    relevance: [value, window, definition]
+
+  - id: C05
+    category: composite
+    question: "14:00—16:00 需求峰值分组占该窗口订单总量的百分比是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00"}
+    derive: peak_share
+    golden: peak_share
+    golden_args: {t0: 420, t1: 540}
+    relevance: [value, dimension, definition]
+
+  - id: C06
+    category: composite
+    question: "第 0 天 14:00—16:00 峰值分组占该日该窗口订单总量的百分比是多少？"
+    tool: drone_demand_aggregate
+    params: {from_hhmm: "14:00", to_hhmm: "16:00", day: 0}
+    derive: peak_share
+    golden: peak_share_day
+    golden_args: {t0: 420, t1: 540, day: 0}
+    relevance: [value, dimension, definition]
+
+  - id: C07
+    category: composite
+    question: "第 0 天巡航阶段轨迹点占全部轨迹点的百分比是多少？"
+    tool: altitude_distribution
+    params: {day: 0}
+    extract: cruise_ratio_pct
+    golden: cruise_ratio
+    golden_args: {day: 0}
+    relevance: [value, definition]
+
+  - id: C08
+    category: composite
+    question: "第 0 天 17:00—19:00 窗口内主导巡航高度层的占比是多少？"
+    tool: altitude_distribution
+    params: {day: 0, from_hhmm: "17:00", to_hhmm: "19:00"}
+    extract: dominant_share_pct
+    golden: cruise_dominant_share_window
+    golden_args: {day: 0, t0: 600, t1: 720}
+    relevance: [value, dimension, window, definition]

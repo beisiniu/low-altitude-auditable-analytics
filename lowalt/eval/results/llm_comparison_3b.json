@@ -1,0 +1,1816 @@
+[
+  {
+    "id": "A01",
+    "category": "aggregation",
+    "question": "全部 5 天 07:00—19:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 233.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 155.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day IN (0,1,2,3,4) AND release_min >= 420 AND release_min < 720",
+          "usage": {
+            "completion_tokens": 36,
+            "prompt_tokens": 549,
+            "total_tokens": 585,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6352.59,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day IN (0,1,2,3,4) AND release_min >= 420 AND release_min < 720"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 180.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE release_min >= 210 AND release_min <= 720",
+          "usage": {
+            "completion_tokens": 22,
+            "prompt_tokens": 372,
+            "total_tokens": 394,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 1944.05,
+          "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= 210 AND release_min <= 720"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 233,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"0\",\"to_hhmm\":\"9\",\"day\":\"0\"},\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"10\",\"to_hhmm\":\"19\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 60,
+            "prompt_tokens": 778,
+            "total_tokens": 838,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9630.04,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "07:00",
+            "to_hhmm": "19:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 46,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A02",
+    "category": "aggregation",
+    "question": "全部 5 天 14:00—16:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 21.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 17.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day IN (1, 2, 3, 4) AND release_min >= 420 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 37,
+            "prompt_tokens": 549,
+            "total_tokens": 586,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6667.13,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day IN (1, 2, 3, 4) AND release_min >= 420 AND release_min < 540"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 4.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day IN (1, 2) AND release_min >= 480 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 31,
+            "prompt_tokens": 372,
+            "total_tokens": 403,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 2721.85,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day IN (1, 2) AND release_min >= 480 AND release_min < 540"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 21,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 778,
+            "total_tokens": 810,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8307.97,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A03",
+    "category": "aggregation",
+    "question": "14:00—16:00 的配送需求峰值出现在哪个起降节点，峰值是多少单？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 9.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT origin_node_id, MAX(COUNT(order_id)) AS peak_orders FROM trajectory_points JOIN orders ON trajectory_points.order_id = orders.order_id WHERE seq = 0 AND hour_bucket = 1 AND release_min >= 420 AND release_min < 540 GROUP BY origin_node_id",
+          "usage": {
+            "completion_tokens": 61,
+            "prompt_tokens": 551,
+            "total_tokens": 612,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8673.93,
+          "sql": "SELECT origin_node_id, MAX(COUNT(order_id)) AS peak_orders FROM trajectory_points JOIN orders ON trajectory_points.order_id = orders.order_id WHERE seq = 0 AND hour_bucket = 1 AND release_min >= 420 AND release_min < 540 GROUP BY origin_node_id",
+          "error": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"order_id\" (use: 'trajectory_points.order_id' or 'orders.order_id')\n\nLINE 1: SELECT origin_node_id, MAX(COUNT(order_id)) AS peak_orders FROM trajectory"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT origin_node_id, MAX(service_min) AS peak_orders FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 1 AND release_min >= 420 AND release_min < 540 GROUP BY origin_node_id",
+          "usage": {
+            "completion_tokens": 61,
+            "prompt_tokens": 437,
+            "total_tokens": 498,
+            "prompt_tokens_details": {
+              "cached_tokens": 376
+            }
+          },
+          "elapsed_ms": 4944.62,
+          "sql": "SELECT origin_node_id, MAX(service_min) AS peak_orders FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 1 AND release_min >= 420 AND release_min < 540 GROUP BY origin_node_id",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 1 AND"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 9,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 780,
+            "total_tokens": 812,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8455.31,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A04",
+    "category": "aggregation",
+    "question": "17:00—19:00 晚高峰的配送需求峰值是多少单？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 31.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT MAX(COUNT(o.order_id)) AS peak_orders FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE o.hour_bucket = 4 AND (o.release_min >= 540 AND o.release_min < 720)",
+          "usage": {
+            "completion_tokens": 60,
+            "prompt_tokens": 548,
+            "total_tokens": 608,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8540.21,
+          "sql": "SELECT MAX(COUNT(o.order_id)) AS peak_orders FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE o.hour_bucket = 4 AND (o.release_min >= 540 AND o.release_min < 720)",
+          "error": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 1: SELECT MAX(COUNT(o.order_id)) AS peak_orders FROM orders o JOIN trajec...\n                   ^^^^^^^^^^^^^^^^^"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT MAX(COUNT(o.order_id))::FLOAT*100.0/SUM(COUNT(o.order_id)) OVER() FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE o.hour_bucket = 5 AND (o.release_min >= 540 AND o.release_min < 720)",
+          "usage": {
+            "completion_tokens": 75,
+            "prompt_tokens": 434,
+            "total_tokens": 509,
+            "prompt_tokens_details": {
+              "cached_tokens": 376
+            }
+          },
+          "elapsed_ms": 5924.01,
+          "sql": "SELECT MAX(COUNT(o.order_id))::FLOAT*100.0/SUM(COUNT(o.order_id)) OVER() FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE o.hour_bucket = 5 AND (o.release_min >= 540 AND o.release_min < 720)",
+          "error": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 1: SELECT MAX(COUNT(o.order_id))::FLOAT*100.0/SUM(COUNT(o.order_id)) OVER...\n                   ^^^^^^^^^^^^^^^^^"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 31,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"17\",\"to_hhmm\":\"19\",\"day\":\"4\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 777,
+            "total_tokens": 809,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8382.0,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "17:00",
+            "to_hhmm": "19:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 13,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A05",
+    "category": "aggregation",
+    "question": "14:00—16:00 按小时分解，15:00—16:00 这一小时的配送量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 16.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders WHERE hour_bucket=1 AND release_min>=480 AND release_min<540",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 563,
+            "total_tokens": 588,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6184.66,
+          "sql": "SELECT COUNT(*) FROM orders WHERE hour_bucket=1 AND release_min>=480 AND release_min<540",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '15:00-16:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: SELECT COUNT(*) FROM orders WHERE hour_bucket=1 AND release_min>=480 AND release_"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 16.0,
+          "numeric_correct": true,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE release_min >= 480 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 22,
+            "prompt_tokens": 386,
+            "total_tokens": 408,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 2189.35,
+          "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= 480 AND release_min < 540"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 16,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"3\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 792,
+            "total_tokens": 824,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8530.04,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A06",
+    "category": "aggregation",
+    "question": "14:00—16:00 从起降节点 1 起飞的配送订单有多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 11.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE tp.origin_node_id = 1 AND o.hour_bucket = 2 AND o.day >= 1 AND o.day <= 2",
+          "usage": {
+            "completion_tokens": 52,
+            "prompt_tokens": 553,
+            "total_tokens": 605,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7983.16,
+          "sql": "SELECT COUNT(*) FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0 WHERE tp.origin_node_id = 1 AND o.hour_bucket = 2 AND o.day >= 1 AND o.day <= 2",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ... = tp.order_id AND tp.seq = 0 WHERE tp.origin_node_id = 1 AND o.hour_bucket = "
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day IN (1) AND release_min>=420 AND release_min<540 AND customer_node_id=1",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 376,
+            "total_tokens": 408,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 2832.0,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day IN (1) AND release_min>=420 AND release_min<540 AND customer_node_id=1"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 11,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 782,
+            "total_tokens": 814,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8503.3,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A07",
+    "category": "aggregation",
+    "question": "第 0 天 14:00—16:00 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 4.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 4.0,
+          "numeric_correct": true,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day = 0 AND release_min >= 420 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 27,
+            "prompt_tokens": 549,
+            "total_tokens": 576,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6193.96,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day = 0 AND release_min >= 420 AND release_min < 540"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 4.0,
+          "numeric_correct": true,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day = 0 AND release_min >= 420 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 27,
+            "prompt_tokens": 372,
+            "total_tokens": 399,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 2517.91,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day = 0 AND release_min >= 420 AND release_min < 540"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 4,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 778,
+            "total_tokens": 810,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8587.47,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "day": 0,
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 9,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "A08",
+    "category": "aggregation",
+    "question": "早高峰 07:30—09:30 的配送订单总量是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 50.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 4.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM orders WHERE day IN (0, 1) AND release_min >= 420 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 31,
+            "prompt_tokens": 546,
+            "total_tokens": 577,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6453.09,
+          "sql": "SELECT COUNT(*) FROM orders WHERE day IN (0, 1) AND release_min >= 420 AND release_min < 540"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 13.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE release_min >= 210 AND release_min < 330",
+          "usage": {
+            "completion_tokens": 22,
+            "prompt_tokens": 369,
+            "total_tokens": 391,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 2112.31,
+          "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= 210 AND release_min < 330"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 50,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"0730\",\"to_hhmm\":\"0930\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 775,
+            "total_tokens": 807,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8504.83,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "07:30",
+            "to_hhmm": "09:30"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 16,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S01",
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区的冲突次数是多少？",
+    "expected_tool": "no_fly_conflict_count",
+    "golden": 0.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": true,
+          "prompt": "full",
+          "raw": "SELECT SUM(CASE WHEN t_min >= 600 AND t_min < 720 THEN 1 ELSE 0 END + CASE WHEN t_min >= 480 AND t_min < 600 THEN 1 ELSE 0 END) FROM trajectory_points JOIN no_fly_zones ON trajectory_points.lat = no_fly_zones.lat AND trajectory_points.lon = no_fly_zones.lon",
+          "usage": {
+            "completion_tokens": 82,
+            "prompt_tokens": 537,
+            "total_tokens": 619,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 10138.06,
+          "sql": "SELECT SUM(CASE WHEN t_min >= 600 AND t_min < 720 THEN 1 ELSE 0 END + CASE WHEN t_min >= 480 AND t_min < 600 THEN 1 ELSE 0 END) FROM trajectory_points JOIN no_fly_zones ON trajectory_points.lat = no_fly_zones.lat AND trajectory_points.lon = no_fly_zones.lon"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT SUM(CASE WHEN t_min >= active_from_min AND t_min < active_to_min THEN 1 ELSE 0 END) FROM trajectory_points WHERE zone_id IN (SELECT zone_id FROM no_fly_zones WHERE active_from_min <= 600 AND active_to_min >= 720)",
+          "usage": {
+            "completion_tokens": 62,
+            "prompt_tokens": 398,
+            "total_tokens": 460,
+            "prompt_tokens_details": {
+              "cached_tokens": 274
+            }
+          },
+          "elapsed_ms": 5421.62,
+          "sql": "SELECT SUM(CASE WHEN t_min >= active_from_min AND t_min < active_to_min THEN 1 ELSE 0 END) FROM trajectory_points WHERE zone_id IN (SELECT zone_id FROM no_fly_zones WHERE active_from_min <= 600 AND active_to_min >= 720)",
+          "error": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... active_to_min THEN 1 ELSE 0 END)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 0,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 17,
+            "prompt_tokens": 766,
+            "total_tokens": 783,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7275.84,
+          "tool": "no_fly_conflict_count",
+          "params": {},
+          "tool_selection_ok": true,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "definition": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S02",
+    "category": "spatial",
+    "question": "全部轨迹落入禁飞区的命中点有多少个？",
+    "expected_tool": "no_fly_conflict_count",
+    "golden": 0.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= (SELECT active_from_min FROM no_fly_zones WHERE zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = (SELECT MIN(active_from_min) FROM no_fly_zones)) AND lon = (SELECT MIN(lon) FROM no_fly_zones)) AND t_min < (SELECT active_to_min FROM no_fly_zones WHERE zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = (SELECT MIN(active_from_min) FROM no_fly_zones)) AND lon = (SELECT MIN(lon) FROM no_fly_zones))) AND origin_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE",
+          "usage": {
+            "completion_tokens": 160,
+            "prompt_tokens": 538,
+            "total_tokens": 698,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 15835.68,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= (SELECT active_from_min FROM no_fly_zones WHERE zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = (SELECT MIN(active_from_min) FROM no_fly_zones)) AND lon = (SELECT MIN(lon) FROM no_fly_zones)) AND t_min < (SELECT active_to_min FROM no_fly_zones WHERE zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = (SELECT MIN(active_from_min) FROM no_fly_zones)) AND lon = (SELECT MIN(lon) FROM no_fly_zones))) AND origin_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE",
+          "error": "SQL failed: ParserException: Parser Error: syntax error at or near \"WHERE\"\n\nLINE 1: ...n_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE\n                                                                      ^^^^^"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT SUM(CASE WHEN t_min >= 600 AND t_min < 720 THEN 1 ELSE 0 END) FROM trajectory_points WHERE zone_id IN (SELECT zone_id FROM no_fly_zones WHERE active_from_min <= 1440 AND active_to_min >= 1800)",
+          "usage": {
+            "completion_tokens": 66,
+            "prompt_tokens": 399,
+            "total_tokens": 465,
+            "prompt_tokens_details": {
+              "cached_tokens": 384
+            }
+          },
+          "elapsed_ms": 4913.89,
+          "sql": "SELECT SUM(CASE WHEN t_min >= 600 AND t_min < 720 THEN 1 ELSE 0 END) FROM trajectory_points WHERE zone_id IN (SELECT zone_id FROM no_fly_zones WHERE active_from_min <= 1440 AND active_to_min >= 1800)",
+          "error": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... t_min < 720 THEN 1 ELSE 0 END) F"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 0,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":0,\"zone_id\":\"z_airport_szx\"}}",
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 767,
+            "total_tokens": 793,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7833.13,
+          "tool": "no_fly_conflict_count",
+          "params": {},
+          "tool_selection_ok": true,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "definition": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S03",
+    "category": "spatial",
+    "question": "全部轨迹与禁飞区冲突的累计时长是多少分钟？",
+    "expected_tool": "no_fly_conflict_count",
+    "golden": 0.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 467100.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT SUM(CASE WHEN T_MIN >= 600 AND T_MIN < 720 THEN 1 ELSE 0 END + CASE WHEN T_MIN >= 660 AND T_MIN < 720 THEN 1 ELSE 0 END) * 60 AS CONFLICT_MINUTES FROM trajectory_points JOIN no_fly_zones ON T_MIN >= active_from_min AND T_MIN < active_to_min",
+          "usage": {
+            "completion_tokens": 85,
+            "prompt_tokens": 540,
+            "total_tokens": 625,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 10341.06,
+          "sql": "SELECT SUM(CASE WHEN T_MIN >= 600 AND T_MIN < 720 THEN 1 ELSE 0 END + CASE WHEN T_MIN >= 660 AND T_MIN < 720 THEN 1 ELSE 0 END) * 60 AS CONFLICT_MINUTES FROM trajectory_points JOIN no_fly_zones ON T_MIN >= active_from_min AND T_MIN < active_to_min"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT SUM(CASE WHEN t_min >= active_from_min AND t_min < active_to_min THEN release_min ELSE 0 END) AS conflict_minutes FROM trajectory_points JOIN no_fly_zones ON ST_Within(trajectory_points.geom, no_fly_zones.geom) JOIN orders ON trajectory_points.order_id = orders.order_id WHERE orders.day IN (0,1,2,3,4)",
+          "usage": {
+            "completion_tokens": 79,
+            "prompt_tokens": 401,
+            "total_tokens": 480,
+            "prompt_tokens_details": {
+              "cached_tokens": 384
+            }
+          },
+          "elapsed_ms": 5971.36,
+          "sql": "SELECT SUM(CASE WHEN t_min >= active_from_min AND t_min < active_to_min THEN release_min ELSE 0 END) AS conflict_minutes FROM trajectory_points JOIN no_fly_zones ON ST_Within(trajectory_points.geom, no_fly_zones.geom) JOIN orders ON trajectory_points.order_id = orders.order_id WHERE orders.day IN (0,1,2,3,4)",
+          "error": "SQL failed: CatalogException: Catalog Error: Scalar Function with name \"st_within\" is not in the catalog, but it exists in the spatial extension.\n\nPlease try installing and loading the spatial extension:\nINSTALL spatial;\nLOAD spat"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 17,
+            "prompt_tokens": 769,
+            "total_tokens": 786,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7229.84,
+          "tool": "no_fly_conflict_count",
+          "params": {},
+          "tool_selection_ok": true,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "definition": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S04",
+    "category": "spatial",
+    "question": "机场禁飞区激活时段 15:00—18:00 内共有多少个轨迹点？",
+    "expected_tool": "no_fly_conflict_count",
+    "golden": 821.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 660 AND zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = 1540 AND active_to_min = 1840) AND lon = (SELECT lon FROM no_fly_zones WHERE active_from_min = 1540 AND active_to_min = 1840) AND active_from_min = 1540 AND active_to_min = 1840)",
+          "usage": {
+            "completion_tokens": 121,
+            "prompt_tokens": 552,
+            "total_tokens": 673,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 13123.55,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 660 AND zone_id = (SELECT zone_id FROM no_fly_zones WHERE lat = (SELECT lat FROM no_fly_zones WHERE active_from_min = 1540 AND active_to_min = 1840) AND lon = (SELECT lon FROM no_fly_zones WHERE active_from_min = 1540 AND active_to_min = 1840) AND active_from_min = 1540 AND active_to_min = 1840)",
+          "error": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... FROM trajectory_points WHERE t_m"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 821.0,
+          "numeric_correct": true,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 480 AND t_min < 660",
+          "usage": {
+            "completion_tokens": 23,
+            "prompt_tokens": 413,
+            "total_tokens": 436,
+            "prompt_tokens_details": {
+              "cached_tokens": 382
+            }
+          },
+          "elapsed_ms": 1951.05,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 480 AND t_min < 660"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 821,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":2,\"zone_id\":\"z_airport_szx\",\"from_hhmm\":\"15:00\",\"to_hhmm\":\"18:00\"}}",
+          "usage": {
+            "completion_tokens": 48,
+            "prompt_tokens": 781,
+            "total_tokens": 829,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9763.99,
+          "tool": "no_fly_conflict_count",
+          "params": {
+            "zone_id": "z_airport_szx",
+            "from_hhmm": "15:00",
+            "to_hhmm": "18:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S05",
+    "category": "spatial",
+    "question": "宝安体育馆临时禁飞区激活时段 17:00—19:00 内共有多少个轨迹点？",
+    "expected_tool": "no_fly_conflict_count",
+    "golden": 920.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 720 AND zone_id = (SELECT zone_id FROM no_fly_zones WHERE active_from_min = 540 AND active_to_min = 720)",
+          "usage": {
+            "completion_tokens": 55,
+            "prompt_tokens": 554,
+            "total_tokens": 609,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8375.98,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 720 AND zone_id = (SELECT zone_id FROM no_fly_zones WHERE active_from_min = 540 AND active_to_min = 720)",
+          "error": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... FROM trajectory_points WHERE t_m"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 271.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 720 AND order_id IN (SELECT order_id FROM orders WHERE day = 3)",
+          "usage": {
+            "completion_tokens": 39,
+            "prompt_tokens": 415,
+            "total_tokens": 454,
+            "prompt_tokens_details": {
+              "cached_tokens": 382
+            }
+          },
+          "elapsed_ms": 3249.31,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE t_min >= 540 AND t_min < 720 AND order_id IN (SELECT order_id FROM orders WHERE day = 3)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 920,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":3,\"zone_id\":\"z_temp_baoan_event\",\"from_hhmm\":1700,\"to_hhmm\":1900}}",
+          "usage": {
+            "completion_tokens": 47,
+            "prompt_tokens": 783,
+            "total_tokens": 830,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9686.83,
+          "tool": "no_fly_conflict_count",
+          "params": {
+            "zone_id": "z_temp_baoan_event"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S06",
+    "category": "spatial",
+    "question": "第 0 天巡航高度层中主导层的占比是多少？",
+    "expected_tool": "altitude_distribution",
+    "golden": 38.46153846153846,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 29.239765167236328,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 600 AND 720 AND order_id IN (SELECT order_id FROM trajectory_points WHERE seq=0) GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 73,
+            "prompt_tokens": 541,
+            "total_tokens": 614,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9522.74,
+          "sql": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 600 AND 720 AND order_id IN (SELECT order_id FROM trajectory_points WHERE seq=0) GROUP BY altitude_layer)"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 38.46153846153846,
+          "numeric_correct": true,
+          "prompt": "focused",
+          "raw": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND day=0 GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 42,
+            "prompt_tokens": 360,
+            "total_tokens": 402,
+            "prompt_tokens_details": {
+              "cached_tokens": 274
+            }
+          },
+          "elapsed_ms": 3735.93,
+          "sql": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND day=0 GROUP BY altitude_layer)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 38.461538,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"altitude_distribution\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 770,
+            "total_tokens": 783,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7029.93,
+          "tool": "altitude_distribution",
+          "params": {
+            "day": 0
+          },
+          "tool_selection_ok": true,
+          "facts_published": 5,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "definition": true,
+            "breakdown": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S07",
+    "category": "spatial",
+    "question": "第 0 天共有多少个巡航阶段轨迹点？",
+    "expected_tool": "altitude_distribution",
+    "golden": 260.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE phase='cruise' AND seq=0 AND t_min BETWEEN 600 AND 720 AND day=0 GROUP BY altitude_layer ORDER BY altitude_layer ASC LIMIT 1",
+          "usage": {
+            "completion_tokens": 46,
+            "prompt_tokens": 539,
+            "total_tokens": 585,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7450.35,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE phase='cruise' AND seq=0 AND t_min BETWEEN 600 AND 720 AND day=0 GROUP BY altitude_layer ORDER BY altitude_layer ASC LIMIT 1"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 260.0,
+          "numeric_correct": true,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM trajectory_points WHERE phase='cruise' AND day=0",
+          "usage": {
+            "completion_tokens": 17,
+            "prompt_tokens": 358,
+            "total_tokens": 375,
+            "prompt_tokens_details": {
+              "cached_tokens": 345
+            }
+          },
+          "elapsed_ms": 1400.98,
+          "sql": "SELECT COUNT(*) FROM trajectory_points WHERE phase='cruise' AND day=0"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 260,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"altitude_distribution\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 768,
+            "total_tokens": 781,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6878.9,
+          "tool": "altitude_distribution",
+          "params": {
+            "day": 0
+          },
+          "tool_selection_ok": true,
+          "facts_published": 5,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "S08",
+    "category": "spatial",
+    "question": "第 0 天主导高度层包含多少个巡航点？",
+    "expected_tool": "altitude_distribution",
+    "golden": 100.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 54.166666666666664,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 600 AND 720 AND order_id IN (SELECT order_id FROM orders WHERE day=0) GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 66,
+            "prompt_tokens": 540,
+            "total_tokens": 606,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8986.11,
+          "sql": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 600 AND 720 AND order_id IN (SELECT order_id FROM orders WHERE day=0) GROUP BY altitude_layer)"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 38.46153846153846,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND day=0 GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 42,
+            "prompt_tokens": 359,
+            "total_tokens": 401,
+            "prompt_tokens_details": {
+              "cached_tokens": 345
+            }
+          },
+          "elapsed_ms": 3199.98,
+          "sql": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND day=0 GROUP BY altitude_layer)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 100,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"altitude_distribution\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 769,
+            "total_tokens": 782,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 6982.8,
+          "tool": "altitude_distribution",
+          "params": {
+            "day": 0
+          },
+          "tool_selection_ok": true,
+          "facts_published": 5,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C01",
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值所在时段，是否与机场禁飞区激活时段 15:00—18:00 重叠？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 1.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT MAX(CASE WHEN hour_bucket = 2 THEN demand_peak ELSE 0 END) > 0 AS overlap FROM (\nSELECT o.hour_bucket, o.origin_node_id, o.demand_peak\nFROM orders o\nJOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0\nWHERE o.release_min >= 420 AND o.release_min < 540\n)",
+          "usage": {
+            "completion_tokens": 84,
+            "prompt_tokens": 569,
+            "total_tokens": 653,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 10748.59,
+          "sql": "SELECT MAX(CASE WHEN hour_bucket = 2 THEN demand_peak ELSE 0 END) > 0 AS overlap FROM (\nSELECT o.hour_bucket, o.origin_node_id, o.demand_peak\nFROM orders o\nJOIN trajectory_points tp ON o.order_id = tp.order_id AND tp.seq = 0\nWHERE o.release_min >= 420 AND o.release_min < 540\n)",
+          "error": "SQL failed: BinderException: Binder Error: Table \"o\" does not have a column named \"origin_node_id\"\n\nCandidate bindings: : \"order_id\"\n\nLINE 2: SELECT o.hour_bucket, o.origin_node_id, o.demand_peak\n                              ^^^"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT CASE WHEN SUM(CASE WHEN T1.hour_bucket = 2 AND T2.active_to_min >= 480 THEN 1 ELSE 0 END) > 0 THEN '重叠' ELSE '不重叠' END AS overlap FROM (SELECT hour_bucket, COUNT(*) AS cnt FROM orders WHERE day IN (2, 3, 4) GROUP BY hour_bucket) AS T1 JOIN no_fly_zones AS T2 ON T1.hour_bucket = T2.vertex_seq WHERE T2.lat = (SELECT MAX(lat) FROM trajectory_points WHERE seq = 0)",
+          "usage": {
+            "completion_tokens": 120,
+            "prompt_tokens": 455,
+            "total_tokens": 575,
+            "prompt_tokens_details": {
+              "cached_tokens": 376
+            }
+          },
+          "elapsed_ms": 9332.15,
+          "sql": "SELECT CASE WHEN SUM(CASE WHEN T1.hour_bucket = 2 AND T2.active_to_min >= 480 THEN 1 ELSE 0 END) > 0 THEN '重叠' ELSE '不重叠' END AS overlap FROM (SELECT hour_bucket, COUNT(*) AS cnt FROM orders WHERE day IN (2, 3, 4) GROUP BY hour_bucket) AS T1 JOIN no_fly_zones AS T2 ON T1.hour_bucket = T2.vertex_seq WHERE T2.lat = (SELECT MAX(lat) FROM trajectory_points WHERE seq = 0)",
+          "error": "SQL failed: ValueError: could not convert string to float: '不重叠'"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 1.0,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"1400\",\"to_hhmm\":\"1600\",\"day\":\"2\"}}",
+          "usage": {
+            "completion_tokens": 36,
+            "prompt_tokens": 798,
+            "total_tokens": 834,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8899.09,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00",
+            "zone_id": "z_airport_szx"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C02",
+    "category": "composite",
+    "question": "17:00—19:00 晚高峰订单量占全天的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 42.918454935622314,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT (SUM(CASE WHEN hour_bucket = 4 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share\nFROM (\n  SELECT hour_bucket, COUNT(*) AS cnt\n  FROM orders\n  WHERE day = 4 AND release_min >= 540 AND release_min < 720\n  GROUP BY hour_bucket\n) AS t\nJOIN (\n  SELECT COUNT(*) AS cnt\n  FROM orders\n  WHERE day = 4\n) AS all_day ON 1=1",
+          "usage": {
+            "completion_tokens": 112,
+            "prompt_tokens": 550,
+            "total_tokens": 662,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 12720.36,
+          "sql": "SELECT (SUM(CASE WHEN hour_bucket = 4 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share\nFROM (\n  SELECT hour_bucket, COUNT(*) AS cnt\n  FROM orders\n  WHERE day = 4 AND release_min >= 540 AND release_min < 720\n  GROUP BY hour_bucket\n) AS t\nJOIN (\n  SELECT COUNT(*) AS cnt\n  FROM orders\n  WHERE day = 4\n) AS all_day ON 1=1",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '17:00-18:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: SELECT (SUM(CASE WHEN hour_bucket = 4 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS.."
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT 100 * COUNT(*) FILTER(WINDOW release_min >= 540 AND release_min <= 720 ON order_id) / COUNT(*) FILTER(WINDOW day = 0 AND day = 1 AND day = 2 AND day = 3 AND day = 4 ON order_id) AS peak_ratio FROM orders",
+          "usage": {
+            "completion_tokens": 70,
+            "prompt_tokens": 373,
+            "total_tokens": 443,
+            "prompt_tokens_details": {
+              "cached_tokens": 344
+            }
+          },
+          "elapsed_ms": 5398.85,
+          "sql": "SELECT 100 * COUNT(*) FILTER(WINDOW release_min >= 540 AND release_min <= 720 ON order_id) / COUNT(*) FILTER(WINDOW day = 0 AND day = 1 AND day = 2 AND day = 3 AND day = 4 ON order_id) AS peak_ratio FROM orders",
+          "error": "SQL failed: ParserException: Parser Error: syntax error at or near \"WINDOW\"\n\nLINE 1: SELECT 100 * COUNT(*) FILTER(WINDOW release_min >= 540 AND release_min <= 720 ON order_id...\n                                     ^^^^^^"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 42.91845493562232,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"17\",\"to_hhmm\":\"19\",\"day\":\"4\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 779,
+            "total_tokens": 811,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8590.02,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "17:00",
+            "to_hhmm": "19:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 13,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C03",
+    "category": "composite",
+    "question": "禁飞区活跃的 15:00—18:00 窗口内共有多少配送订单？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 95.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT COUNT(order_id) FROM orders WHERE hour_bucket = 4 AND release_min >= 480 AND release_min < 600 AND customer_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE seq = 0)",
+          "usage": {
+            "completion_tokens": 49,
+            "prompt_tokens": 553,
+            "total_tokens": 602,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7953.0,
+          "sql": "SELECT COUNT(order_id) FROM orders WHERE hour_bucket = 4 AND release_min >= 480 AND release_min < 600 AND customer_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE seq = 0)"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 0.0,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT COUNT(*) FROM orders WHERE release_min >= 480 AND release_min < 600 AND earliest_min <= 15 AND latest_min >= 15",
+          "usage": {
+            "completion_tokens": 36,
+            "prompt_tokens": 376,
+            "total_tokens": 412,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 3176.63,
+          "sql": "SELECT COUNT(*) FROM orders WHERE release_min >= 480 AND release_min < 600 AND earliest_min <= 15 AND latest_min >= 15"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": null,
+          "numeric_correct": false,
+          "raw": "{\"tool\":\"no_fly_conflict_count\",\"params\":{\"day\":2,\"from_hhmm\":1500,\"to_hhmm\":1800}}",
+          "usage": {
+            "completion_tokens": 37,
+            "prompt_tokens": 782,
+            "total_tokens": 819,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9032.46,
+          "tool": "no_fly_conflict_count",
+          "params": {},
+          "tool_selection_ok": false,
+          "facts_published": 1,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": false,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 0.6666666666666666
+        }
+      }
+    ]
+  },
+  {
+    "id": "C04",
+    "category": "composite",
+    "question": "15:00—18:00 窗口内的订单量占全天的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 40.772532188841204,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT (SUM(CASE WHEN release_min >= 480 AND release_min < 600 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share FROM orders WHERE hour_bucket = 3",
+          "usage": {
+            "completion_tokens": 51,
+            "prompt_tokens": 551,
+            "total_tokens": 602,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7910.18,
+          "sql": "SELECT (SUM(CASE WHEN release_min >= 480 AND release_min < 600 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share FROM orders WHERE hour_bucket = 3",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ... 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share FROM orders WHERE hour_bucket = 3\n"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT 100 * COUNT(*) FILTER(WITHIN_WINDOW(release_min >= 480 AND release_min < 600)) OVER() / COUNT(*) FROM orders WHERE day IN (0,1,2,3,4)",
+          "usage": {
+            "completion_tokens": 52,
+            "prompt_tokens": 374,
+            "total_tokens": 426,
+            "prompt_tokens_details": {
+              "cached_tokens": 313
+            }
+          },
+          "elapsed_ms": 4335.63,
+          "sql": "SELECT 100 * COUNT(*) FILTER(WITHIN_WINDOW(release_min >= 480 AND release_min < 600)) OVER() / COUNT(*) FROM orders WHERE day IN (0,1,2,3,4)",
+          "error": "SQL failed: CatalogException: Catalog Error: Scalar Function with name within_window does not exist!\nDid you mean \"list_indexof\"?\n\nLINE 1: SELECT 100 * COUNT(*) FILTER(WITHIN_WINDOW(release_min >= 480 AND release_min < 600)...\n   "
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 40.772532188841204,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"15\",\"to_hhmm\":\"18\",\"day\":\"3\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 780,
+            "total_tokens": 812,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8510.19,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "15:00",
+            "to_hhmm": "18:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 17,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "window": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C05",
+    "category": "composite",
+    "question": "14:00—16:00 需求峰值分组占该窗口订单总量的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 42.857142857142854,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT CAST(SUM(CASE WHEN hour_bucket = 2 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id WHERE hour_bucket = 2 AND seq = 0 AND t_min >= 420 AND t_min < 540",
+          "usage": {
+            "completion_tokens": 75,
+            "prompt_tokens": 554,
+            "total_tokens": 629,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 9764.74,
+          "sql": "SELECT CAST(SUM(CASE WHEN hour_bucket = 2 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id WHERE hour_bucket = 2 AND seq = 0 AND t_min >= 420 AND t_min < 540",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ints ON orders.order_id = trajectory_points.order_id WHERE hour_bucket = 2 AND"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT CAST(SUM(CASE WHEN hour_bucket = 2 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 2 AND release_min >= 420 AND release_min < 540",
+          "usage": {
+            "completion_tokens": 77,
+            "prompt_tokens": 440,
+            "total_tokens": 517,
+            "prompt_tokens_details": {
+              "cached_tokens": 376
+            }
+          },
+          "elapsed_ms": 5982.09,
+          "sql": "SELECT CAST(SUM(CASE WHEN hour_bucket = 2 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 2 AND release_min >= 420 AND release_min < 540",
+          "error": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 2 AND"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 42.857142857142854,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 783,
+            "total_tokens": 815,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8495.6,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 12,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C06",
+    "category": "composite",
+    "question": "第 0 天 14:00—16:00 峰值分组占该日该窗口订单总量的百分比是多少？",
+    "expected_tool": "drone_demand_aggregate",
+    "golden": 50.0,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT CAST(SUM(CASE WHEN hour_bucket = 0 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id WHERE day = 0 AND release_min >= 420 AND release_min < 540 AND trajectory_points.phase = 'cruise' AND trajectory_points.origin_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE seq = 0)",
+          "usage": {
+            "completion_tokens": 99,
+            "prompt_tokens": 561,
+            "total_tokens": 660,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 11731.44,
+          "sql": "SELECT CAST(SUM(CASE WHEN hour_bucket = 0 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders JOIN trajectory_points ON orders.order_id = trajectory_points.order_id WHERE day = 0 AND release_min >= 420 AND release_min < 540 AND trajectory_points.phase = 'cruise' AND trajectory_points.origin_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE seq = 0)",
+          "error": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"day\" (use: 'orders.\"day\"' or 'trajectory_points.\"day\"')\n\nLINE 1: ...ints ON orders.order_id = trajectory_points.order_id WHERE day = 0 AND release_min"
+        },
+        "llm_sql_focused": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT CAST(SUM(CASE WHEN T.hour_bucket = 1 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders O JOIN trajectory_points T ON O.order_id = T.order_id AND T.seq = 0 WHERE O.day = 0 AND O.release_min >= 420 AND O.release_min < 540",
+          "usage": {
+            "completion_tokens": 80,
+            "prompt_tokens": 447,
+            "total_tokens": 527,
+            "prompt_tokens_details": {
+              "cached_tokens": 376
+            }
+          },
+          "elapsed_ms": 6407.28,
+          "sql": "SELECT CAST(SUM(CASE WHEN T.hour_bucket = 1 THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) FROM orders O JOIN trajectory_points T ON O.order_id = T.order_id AND T.seq = 0 WHERE O.day = 0 AND O.release_min >= 420 AND O.release_min < 540",
+          "error": "SQL failed: BinderException: Binder Error: Table \"T\" does not have a column named \"hour_bucket\"\n\nCandidate bindings: : \"lat\"\n\nLINE 1: SELECT CAST(SUM(CASE WHEN T.hour_bucket = 1 THEN 1 ELSE 0 END) AS REAL) * 100.0 /...\n          "
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 50.0,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"drone_demand_aggregate\",\"params\":{\"from_hhmm\":\"14\",\"to_hhmm\":\"16\",\"day\":\"0\"}}",
+          "usage": {
+            "completion_tokens": 32,
+            "prompt_tokens": 790,
+            "total_tokens": 822,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8577.9,
+          "tool": "drone_demand_aggregate",
+          "params": {
+            "day": 0,
+            "from_hhmm": "14:00",
+            "to_hhmm": "16:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 9,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C07",
+    "category": "composite",
+    "question": "第 0 天巡航阶段轨迹点占全部轨迹点的百分比是多少？",
+    "expected_tool": "altitude_distribution",
+    "golden": 55.55555555555556,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": false,
+          "value": null,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "WITH launch AS (SELECT origin_node_id FROM trajectory_points WHERE seq = 0),\npeak AS (SELECT o.hour_bucket, o.customer_node_id, MAX(o.service_min) AS max_service_min\n         FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id\n         WHERE tp.seq = 0\n         GROUP BY o.hour_bucket, o.customer_node_id)\nSELECT (SELECT COUNT(*) FROM trajectory_points WHERE phase = 'cruise' AND altitude_layer IN (SELECT altitude_layer FROM trajectory_points WHERE order_id IN (SELECT order_id FROM orders WHERE day = 0)))*100.0/SUM(COUNT(*) FROM trajectory_points WHERE phase = 'cruise') FROM launch JOIN peak ON launch.origin_node_id = peak.customer_node_id AND peak.hour_bucket = ",
+          "usage": {
+            "completion_tokens": 160,
+            "prompt_tokens": 544,
+            "total_tokens": 704,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 15888.34,
+          "sql": "WITH launch AS (SELECT origin_node_id FROM trajectory_points WHERE seq = 0),\npeak AS (SELECT o.hour_bucket, o.customer_node_id, MAX(o.service_min) AS max_service_min\n         FROM orders o JOIN trajectory_points tp ON o.order_id = tp.order_id\n         WHERE tp.seq = 0\n         GROUP BY o.hour_bucket, o.customer_node_id)\nSELECT (SELECT COUNT(*) FROM trajectory_points WHERE phase = 'cruise' AND altitude_layer IN (SELECT altitude_layer FROM trajectory_points WHERE order_id IN (SELECT order_id FROM orders WHERE day = 0)))*100.0/SUM(COUNT(*) FROM trajectory_points WHERE phase = 'cruise') FROM launch JOIN peak ON launch.origin_node_id = peak.customer_node_id AND peak.hour_bucket =",
+          "error": "SQL failed: ParserException: Parser Error: syntax error at or near \"FROM\"\n\nLINE 6: ... order_id FROM orders WHERE day = 0)))*100.0/SUM(COUNT(*) FROM trajectory_points WHERE phase = 'cruise') FROM launch...\n                       "
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 38.46154022216797,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase = 'cruise' AND day = 0 GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 50,
+            "prompt_tokens": 363,
+            "total_tokens": 413,
+            "prompt_tokens_details": {
+              "cached_tokens": 345
+            }
+          },
+          "elapsed_ms": 3825.24,
+          "sql": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase = 'cruise' AND day = 0 GROUP BY altitude_layer)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 55.555556,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"altitude_distribution\",\"params\":{\"day\":0}}",
+          "usage": {
+            "completion_tokens": 13,
+            "prompt_tokens": 773,
+            "total_tokens": 786,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 7041.08,
+          "tool": "altitude_distribution",
+          "params": {
+            "day": 0
+          },
+          "tool_selection_ok": true,
+          "facts_published": 5,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "definition": true
+          },
+          "relevance_score": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "C08",
+    "category": "composite",
+    "question": "第 0 天 17:00—19:00 窗口内主导巡航高度层的占比是多少？",
+    "expected_tool": "altitude_distribution",
+    "golden": 54.166666666666664,
+    "repeats": [
+      {
+        "repeat": 0,
+        "llm_sql": {
+          "parsed": true,
+          "value": 27.52293586730957,
+          "numeric_correct": false,
+          "prompt": "full",
+          "raw": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE t_min BETWEEN 540 AND 720 AND phase = 'cruise' GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 556,
+            "total_tokens": 614,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8512.47,
+          "sql": "SELECT CAST(MAX(n) AS REAL) * 100.0 / SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE t_min BETWEEN 540 AND 720 AND phase = 'cruise' GROUP BY altitude_layer)"
+        },
+        "llm_sql_focused": {
+          "parsed": true,
+          "value": 53.84615384615385,
+          "numeric_correct": false,
+          "prompt": "focused",
+          "raw": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 540 AND 720 AND day=0 GROUP BY altitude_layer)",
+          "usage": {
+            "completion_tokens": 55,
+            "prompt_tokens": 375,
+            "total_tokens": 430,
+            "prompt_tokens_details": {
+              "cached_tokens": 345
+            }
+          },
+          "elapsed_ms": 4225.73,
+          "sql": "SELECT MAX(n)*100.0/SUM(n) FROM (SELECT altitude_layer, COUNT(*) AS n FROM trajectory_points WHERE phase='cruise' AND t_min BETWEEN 540 AND 720 AND day=0 GROUP BY altitude_layer)"
+        },
+        "llm_tools": {
+          "parsed": true,
+          "value": 54.166667,
+          "numeric_correct": true,
+          "raw": "{\"tool\":\"altitude_distribution\",\"params\":{\"day\":0,\"from_hhmm\":540,\"to_hhmm\":720}}",
+          "usage": {
+            "completion_tokens": 31,
+            "prompt_tokens": 785,
+            "total_tokens": 816,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "elapsed_ms": 8380.83,
+          "tool": "altitude_distribution",
+          "params": {
+            "day": 0,
+            "from_hhmm": "17:00",
+            "to_hhmm": "19:00"
+          },
+          "tool_selection_ok": true,
+          "facts_published": 5,
+          "v2_pass_rate": 1.0,
+          "relevance": {
+            "value": true,
+            "dimension": true,
+            "window": false,
+            "definition": true
+          },
+          "relevance_score": 0.75
+        }
+      }
+    ]
+  }
+]

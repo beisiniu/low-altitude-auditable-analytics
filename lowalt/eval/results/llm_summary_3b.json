@@ -1,0 +1,179 @@
+{
+  "llm_sql": {
+    "n": 24,
+    "parsed": 11,
+    "numeric_correct": 2,
+    "numeric_accuracy": 0.0833,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 9418.81
+  },
+  "llm_sql_focused": {
+    "n": 24,
+    "parsed": 15,
+    "numeric_correct": 5,
+    "numeric_accuracy": 0.2083,
+    "relevance_mean": 0.0,
+    "tool_selection_ok": 0,
+    "verifiable_numbers": 0,
+    "mean_elapsed_ms": 4071.41
+  },
+  "llm_tools": {
+    "n": 24,
+    "parsed": 24,
+    "numeric_correct": 23,
+    "numeric_accuracy": 0.9583,
+    "relevance_mean": 0.9757,
+    "tool_selection_ok": 23,
+    "verifiable_numbers": 226,
+    "mean_elapsed_ms": 8296.22
+  },
+  "errors": [
+    {
+      "id": "A03",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"order_id\" (use: 'trajectory_points.order_id' or 'orders.order_id')\n\nLINE 1: SELECT origin_node_id, MAX(COUNT(order_id)) AS peak_orders FROM trajectory"
+    },
+    {
+      "id": "A03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 1 AND"
+    },
+    {
+      "id": "A04",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 1: SELECT MAX(COUNT(o.order_id)) AS peak_orders FROM orders o JOIN trajec...\n                   ^^^^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "A04",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: aggregate function calls cannot be nested\n\nLINE 1: SELECT MAX(COUNT(o.order_id))::FLOAT*100.0/SUM(COUNT(o.order_id)) OVER...\n                   ^^^^^^^^^^^^^^^^^"
+    },
+    {
+      "id": "A05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '15:00-16:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: SELECT COUNT(*) FROM orders WHERE hour_bucket=1 AND release_min>=480 AND release_"
+    },
+    {
+      "id": "A06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ... = tp.order_id AND tp.seq = 0 WHERE tp.origin_node_id = 1 AND o.hour_bucket = "
+    },
+    {
+      "id": "S01",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... active_to_min THEN 1 ELSE 0 END)"
+    },
+    {
+      "id": "S02",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"WHERE\"\n\nLINE 1: ...n_node_id IN (SELECT origin_node_id FROM trajectory_points WHERE\n                                                                      ^^^^^"
+    },
+    {
+      "id": "S02",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... t_min < 720 THEN 1 ELSE 0 END) F"
+    },
+    {
+      "id": "S03",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: CatalogException: Catalog Error: Scalar Function with name \"st_within\" is not in the catalog, but it exists in the spatial extension.\n\nPlease try installing and loading the spatial extension:\nINSTALL spatial;\nLOAD spat"
+    },
+    {
+      "id": "S04",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... FROM trajectory_points WHERE t_m"
+    },
+    {
+      "id": "S05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Referenced column \"zone_id\" not found in FROM clause!\nCandidate bindings: \"order_id\", \"lon\", \"origin_node_id\", \"traj_id\", \"customer_node_id\"\n\nLINE 1: ... FROM trajectory_points WHERE t_m"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Table \"o\" does not have a column named \"origin_node_id\"\n\nCandidate bindings: : \"order_id\"\n\nLINE 2: SELECT o.hour_bucket, o.origin_node_id, o.demand_peak\n                              ^^^"
+    },
+    {
+      "id": "C01",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ValueError: could not convert string to float: '不重叠'"
+    },
+    {
+      "id": "C02",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '17:00-18:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: SELECT (SUM(CASE WHEN hour_bucket = 4 THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS.."
+    },
+    {
+      "id": "C02",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"WINDOW\"\n\nLINE 1: SELECT 100 * COUNT(*) FILTER(WINDOW release_min >= 540 AND release_min <= 720 ON order_id...\n                                     ^^^^^^"
+    },
+    {
+      "id": "C04",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ... 1 ELSE 0 END) * 100.0 / COUNT(*)) AS share FROM orders WHERE hour_bucket = 3\n"
+    },
+    {
+      "id": "C04",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: CatalogException: Catalog Error: Scalar Function with name within_window does not exist!\nDid you mean \"list_indexof\"?\n\nLINE 1: SELECT 100 * COUNT(*) FILTER(WITHIN_WINDOW(release_min >= 480 AND release_min < 600)...\n   "
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '07:00-08:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ints ON orders.order_id = trajectory_points.order_id WHERE hour_bucket = 2 AND"
+    },
+    {
+      "id": "C05",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: ConversionException: Conversion Error: Could not convert string '14:00-15:00' to INT32 when casting from source column hour_bucket\n\nLINE 1: ...ectory_points.order_id AND trajectory_points.seq = 0 WHERE hour_bucket = 2 AND"
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql",
+      "reason": "SQL failed: BinderException: Binder Error: Ambiguous reference to column name \"day\" (use: 'orders.\"day\"' or 'trajectory_points.\"day\"')\n\nLINE 1: ...ints ON orders.order_id = trajectory_points.order_id WHERE day = 0 AND release_min"
+    },
+    {
+      "id": "C06",
+      "arm": "llm_sql_focused",
+      "reason": "SQL failed: BinderException: Binder Error: Table \"T\" does not have a column named \"hour_bucket\"\n\nCandidate bindings: : \"lat\"\n\nLINE 1: SELECT CAST(SUM(CASE WHEN T.hour_bucket = 1 THEN 1 ELSE 0 END) AS REAL) * 100.0 /...\n          "
+    },
+    {
+      "id": "C07",
+      "arm": "llm_sql",
+      "reason": "SQL failed: ParserException: Parser Error: syntax error at or near \"FROM\"\n\nLINE 6: ... order_id FROM orders WHERE day = 0)))*100.0/SUM(COUNT(*) FROM trajectory_points WHERE phase = 'cruise') FROM launch...\n                       "
+    }
+  ],
+  "meta": {
+    "questions": 24,
+    "repeats": 1,
+    "model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+    "engine": "llama.cpp CPU",
+    "endpoint": "http://127.0.0.1:8081",
+    "temperature": 0,
+    "seed": 42,
+    "api_key_required": false,
+    "data_left_host": false,
+    "fairness": "llm_sql and llm_tools receive identical schema + all definitions; llm_sql_focused is a favourable ABLATION (only the definitions relevant to that question), used to test whether the SQL arm's failure is a long-prompt artefact",
+    "tool_arm_validation": "typed params are validated against schema: day 0..4, HH:MM within 07:00-19:00, zone_id whitelist, traj_id pattern"
+  },
+  "by_category_accuracy": {
+    "aggregation": {
+      "llm_sql": 0.125,
+      "llm_sql_focused": 0.25,
+      "llm_tools": 1.0
+    },
+    "spatial": {
+      "llm_sql": 0.125,
+      "llm_sql_focused": 0.375,
+      "llm_tools": 1.0
+    },
+    "composite": {
+      "llm_sql": 0.0,
+      "llm_sql_focused": 0.0,
+      "llm_tools": 0.875
+    }
+  }
+}

@@ -1,0 +1,52 @@
+低空物流可审计分析 Agent 二次开发
+=====================================
+
+一、上游项目
+------------
+本仓库是基于以下开源项目的二次开发：
+
+  gfirik/agentic-analytics
+  https://github.com/gfirik/agentic-analytics
+  License: Apache License 2.0（LICENSE 文件已原样保留）
+  上游基线提交: 3be7f9b53df6e40eb590aef24921336945d25f41
+
+上游仅有的改动：
+  - packages/verify/src/recompute.ts：新增 1 行 import，规则查找改为
+    `RULES[fn] ?? LOWALT_RULES[fn]`
+  - 新增 packages/verify/src/lowaltitude-rules.ts：3 条镜像重算规则
+
+模型层、core 状态机、agent、report 包与所有既有验证规则均未修改。
+真实 patch 与 git status 清单见 UPSTREAM_CHANGES.txt；TS 补丁副本见
+lowalt/integration/lowaltitude-rules.ts。
+
+二、数据集
+----------
+  Seed-Controlled Benchmark Instances for Dynamic Truck-Drone Delivery
+  Dispatch (Shenzhen Qianhai Case)
+  Author: Jin Xin Cao (Inner Mongolia Academy of Science and Technology)
+  IEEE DataPort, 2026-09-30
+  DOI: 10.21227/3gxb-mj63
+  License: Creative Commons Attribution 4.0 (CC BY 4.0)
+
+本仓库未分发需要 IEEE SAML 登录的 53.1 KB 主归档。数据由页面公开免登录的
+DATASET SCRIPTS 归档中 build_case.py 的常量确定性复现；该脚本原样保存在
+lowalt/data/ieee_build_case.py，其 SHA-256 记录在 lowalt/data/out/manifest.json。
+
+按 CC BY 4.0 要求，使用或引用本数据集时请标注上述 DOI 与作者。
+数据层次（公开参数 / 按规则抽样 / 派生合成）与口径差异详见
+docs/SOURCES.md。
+
+三、第三方组件
+--------------
+  DuckDB            MIT         https://duckdb.org
+  PyYAML            MIT         https://pyyaml.org
+  llama.cpp         MIT         https://github.com/ggml-org/llama.cpp
+  Qwen2.5 GGUF      Qwen License  https://modelscope.cn/organization/Qwen
+
+模型权重与推理引擎二进制未随本仓库分发，获取方式见 models/README.md。
+
+四、本仓库新增内容
+------------------
+新增代码与文档同样以 Apache License 2.0 发布。
+两篇文档（docs/01_*、docs/02_*）中引用的全部实验数字均为本仓库
+lowalt/eval/results/ 下的实测结果，可通过 `python tools/build_all.py` 复现。
